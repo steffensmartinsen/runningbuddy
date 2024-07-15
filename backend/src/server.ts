@@ -1,17 +1,22 @@
 // Import the 'express' module along with 'Request' and 'Response' types from express
 import express, { Request, Response } from 'express';
+import * as constants from './constants';
+import { Home } from './routes/home';
+
+const routes = require('./routes/index');
 
 // Create an Express application
 const app = express();
+app.use(express.json());
+
+// Serve the root path of the application
+app.get(constants.ROOT, Home);
+
+// Serve the pace calculator endpoint
+app.use(constants.ENDPOINT_PACE_CALCULATOR, routes);
 
 // Specify the port number for the server
-const port: number = 8080;
-
-// Define a route for the root path ('/')
-app.get('/', (req: Request, res: Response) => {
-  // Send a response to the client
-  res.send('Hello, TypeScript + Node.js + Express!');
-});
+const port: number = constants.PORT
 
 // Start the server and listen on the specified port
 app.listen(port, () => {

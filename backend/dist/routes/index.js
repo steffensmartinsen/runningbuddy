@@ -26,22 +26,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// Import the 'express' module along with 'Request' and 'Response' types from express
+const constants = __importStar(require("../constants"));
 const express_1 = __importDefault(require("express"));
-const constants = __importStar(require("./constants"));
-const home_1 = require("./routes/home");
-const routes = require('./routes/index');
-// Create an Express application
-const app = (0, express_1.default)();
-app.use(express_1.default.json());
-// Serve the root path of the application
-app.get(constants.ROOT, home_1.Home);
-// Serve the pace calculator endpoint
-app.use(constants.ENDPOINT_PACE_CALCULATOR, routes);
-// Specify the port number for the server
-const port = constants.PORT;
-// Start the server and listen on the specified port
-app.listen(port, () => {
-    // Log a message when the server is successfully running
-    console.log(`Server is running on http://localhost:${port}`);
+const pace_calculator_1 = require("./pace-calculator");
+const router = express_1.default.Router();
+router.get(constants.ROOT, (req, res) => {
+    res.send('Hello World!');
 });
+router.post(constants.ENDPOINT_DISTANCES, pace_calculator_1.PaceCalculatorPOST);
+module.exports = router;

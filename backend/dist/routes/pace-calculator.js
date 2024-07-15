@@ -22,26 +22,29 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-// Import the 'express' module along with 'Request' and 'Response' types from express
-const express_1 = __importDefault(require("express"));
-const constants = __importStar(require("./constants"));
-const home_1 = require("./routes/home");
-const routes = require('./routes/index');
-// Create an Express application
-const app = (0, express_1.default)();
-app.use(express_1.default.json());
-// Serve the root path of the application
-app.get(constants.ROOT, home_1.Home);
-// Serve the pace calculator endpoint
-app.use(constants.ENDPOINT_PACE_CALCULATOR, routes);
-// Specify the port number for the server
-const port = constants.PORT;
-// Start the server and listen on the specified port
-app.listen(port, () => {
-    // Log a message when the server is successfully running
-    console.log(`Server is running on http://localhost:${port}`);
-});
+exports.PaceCalculatorPOST = PaceCalculatorPOST;
+const constants = __importStar(require("../constants"));
+// PaceCalculatorPOST is the function that serves the '/pace-calculator' path
+function PaceCalculatorPOST(req, res) {
+    let min = req.body.minutes;
+    let sec = req.body.seconds;
+    console.log(min, sec);
+    let pace = Calculator5k(min, sec);
+    res.json({
+        minutes: pace.minutes,
+        seconds: pace.seconds
+    }).sendStatus(200);
+}
+// Calculator5k is the function that calculates the 5k time for a given pace
+function Calculator5k(min, seconds) {
+    min = min * 60;
+    let time = min + seconds;
+    let distance_time = time * constants.FIVE_K;
+    let distance_min = distance_time / constants.MINUTES_IN_HOUR;
+    let distance_sec = distance_time % constants.MINUTES_IN_HOUR;
+    return {
+        minutes: Math.floor(distance_min),
+        seconds: distance_sec
+    };
+}
