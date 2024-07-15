@@ -28,10 +28,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants = __importStar(require("../constants"));
 const express_1 = __importDefault(require("express"));
-const pace_calculator_1 = require("./pace-calculator");
+const distances_1 = require("./distances");
 const router = express_1.default.Router();
 router.get(constants.ROOT, (req, res) => {
     res.send('Hello World!');
 });
-router.post(constants.ENDPOINT_DISTANCES, pace_calculator_1.PaceCalculatorPOST);
+router.post(constants.ENDPOINT_DISTANCES, distances_1.PaceCalculatorPOST);
 module.exports = router;

@@ -1,6 +1,6 @@
 import * as constants from '../constants';
 import express from 'express';
-import { PaceCalculatorPOST } from './pace-calculator';
+import { PaceCalculatorPOST } from './distances';
 
 const router = express.Router();
 
