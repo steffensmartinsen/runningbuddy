@@ -1,6 +1,7 @@
 
 // Data structure to hold the return data for the 5K distance
-export interface Distance5K {
+export interface DistanceTime {
+    hours: number;
     minutes: number;
     seconds: number;
 }

@@ -29,22 +29,52 @@ const constants = __importStar(require("../constants"));
 function PaceCalculatorPOST(req, res) {
     let min = req.body.minutes;
     let sec = req.body.seconds;
-    console.log(min, sec);
-    let pace = Calculator5k(min, sec);
+    let pace5k = CalculateTime(constants.DISTANCE_FIVE_K, min, sec);
+    let pace10k = CalculateTime(constants.DISTANCE_TEN_K, min, sec);
+    let paceHalfMarathon = CalculateTime(constants.DISTANCE_HALF_MARATHON, min, sec);
+    let paceMarathon = CalculateTime(constants.DISTANCE_MARATHON, min, sec);
     res.json({
-        minutes: pace.minutes,
-        seconds: pace.seconds
-    }).sendStatus(200);
+        "5K": {
+            minutes: pace5k.minutes,
+            seconds: pace5k.seconds
+        },
+        "10K": {
+            hours: pace10k.hours,
+            minutes: pace10k.minutes,
+            seconds: pace10k.seconds
+        },
+        "Half Marathon": {
+            hours: paceHalfMarathon.hours,
+            minutes: paceHalfMarathon.minutes,
+            seconds: paceHalfMarathon.seconds
+        },
+        "Marathon": {
+            hours: paceMarathon.hours,
+            minutes: paceMarathon.minutes,
+            seconds: paceMarathon.seconds
+        }
+    });
 }
-// Calculator5k is the function that calculates the 5k time for a given pace
-function Calculator5k(min, seconds) {
-    min = min * 60;
+// CalculateTime calculates the time it takes to run a distance based on the input parameters
+// distance: the distance to calculate the time for
+// min: the minutes to calculate the time for
+// seconds: the seconds to calculate the time for
+function CalculateTime(distance, min, seconds) {
+    min = min * constants.SECONDS_IN_MINUTE;
     let time = min + seconds;
-    let distance_time = time * constants.FIVE_K;
-    let distance_min = distance_time / constants.MINUTES_IN_HOUR;
-    let distance_sec = distance_time % constants.MINUTES_IN_HOUR;
+    // Combine the time to work with seconds
+    let distance_time = time * distance;
+    let distance_hr = Math.floor(((distance_time / constants.SECONDS_IN_MINUTE)) / constants.MINUTES_IN_HOUR);
+    // Handle the case where the distance is greater than an hour
+    if (distance_hr > 0) {
+        distance_time = distance_time - (distance_hr * constants.MINUTES_IN_HOUR * constants.SECONDS_IN_MINUTE);
+    }
+    // Calculate the minutes and seconds
+    let distance_min = Math.floor(distance_time / constants.SECONDS_IN_MINUTE);
+    let distance_sec = Math.round(distance_time % constants.SECONDS_IN_MINUTE);
     return {
-        minutes: Math.floor(distance_min),
+        hours: distance_hr,
+        minutes: distance_min,
         seconds: distance_sec
     };
 }
