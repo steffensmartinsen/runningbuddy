@@ -22,25 +22,34 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DistanceHandler = DistanceHandler;
 const constants = __importStar(require("../constants"));
-const express_1 = __importDefault(require("express"));
-const times_1 = require("./times");
-const pace_1 = require("./pace");
-const distance_1 = require("./distance");
-const home_1 = require("./home");
-// Create an Express router
-const router = express_1.default.Router();
-// Serve the paths of the pace-calculator endpoint
-router.get(constants.ROOT, home_1.Home);
-// Distance calculation routes
-router.use(constants.ENDPOINT_TIMES, times_1.CalculateTimeHandler);
-router.use(constants.ENDPOINT_SPECIFIED_DISTANCE, times_1.CalculateSpecifiedDistanceTimeHandler);
-// Pace calculation route
-router.use(constants.ENDPOINT_PACE, pace_1.PaceHandler);
-// Distance calculation route
-router.use(constants.ENDPOINT_DISTANCE, distance_1.DistanceHandler);
-module.exports = router;
+function DistanceHandler(req, res) {
+    if (req.method === constants.HTTP_METHOD_POST) {
+        CalculateDistance(req, res);
+    }
+    else {
+        res.status(constants.HTTP_STATUS_METHOD_NOT_ALLOWED).send(constants.TEXT_METHOD_NOT_ALLOWED);
+    }
+}
+function CalculateDistance(req, res) {
+    // Extract the running time input paramteres
+    const runningHour = req.body.time.hour;
+    const runningMin = req.body.time.min;
+    const runningSec = req.body.time.sec;
+    // Extract the pace input parameters
+    const paceMin = req.body.pace.min;
+    const paceSec = req.body.pace.sec;
+    // Calculate running time to seconds
+    const runInSeconds = ((runningHour * constants.MINUTES_IN_HOUR) * constants.SECONDS_IN_MINUTE)
+        + (runningMin * constants.SECONDS_IN_MINUTE)
+        + runningSec;
+    // Calculate pace to seconds
+    const paceInSeconds = (paceMin * constants.MINUTES_IN_HOUR) + paceSec;
+    // Calculate the distance and multiply it by 60 minutes
+    const distance = (runInSeconds / paceInSeconds);
+    res.json({
+        "distance": distance.toFixed(2)
+    });
+}
