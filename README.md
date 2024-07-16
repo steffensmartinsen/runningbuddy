@@ -14,15 +14,15 @@ The service serves the following endpoints:
 
 ## distances
 
-The `distances` endpoint recieves a *minutes* and *seconds* input parameter from the request body, and calculates the times for the most popular distances: 5K, 10K, Half-Marathon, and Marathon. These times are returned in JSON format for these distances (see example response body).
+The `distances` endpoint recieves a *min* and *sec* input parameter from the request body, and calculates the times for the most popular distances: 5K, 10K, Half-Marathon, and Marathon. These times are returned in JSON format for these distances (see example response body).
 
-The *seconds* input parameter must be less than 60, and both input parameters must be greater than or equal to 0.
+The *sec* input parameter must be less than 60, and both input parameters must be greater than or equal to 0.
 
 **Example Request Body:**
 ```
 {
-    "minutes": 5,
-    "seconds": 50
+    "min": 5,
+    "sec": 50
 }
 ```
 
@@ -56,16 +56,16 @@ The *seconds* input parameter must be less than 60, and both input parameters mu
 ```
 
 ## specified-distance
-The `specified-distance` endpoint recieves a *distance*, *minutes* and *seconds* input parameter from the request body, and calculates the running time for the provided distance given the provided pace (minutes and seconds). The time for this distance is then returned in JSON format (see example response body).
+The `specified-distance` endpoint recieves a *distance*, *min* and *sec* input parameter from the request body, and calculates the running time for the provided distance given the provided pace (min and sec). The time for this distance is then returned in JSON format (see example response body).
 
-The *distances* input parameter is the distances in kilometers. The *seconds* parameter must be less than 60, and all input parameters must be greater or equal to 0.
+The *distances* input parameter is the distances in kilometers. The *sec* parameter must be less than 60, and all input parameters must be greater or equal to 0.
 
 **Example Request Body:**
 ```
 {
     "distance": 8.45,
-    "minutes": 5,
-    "seconds": 45
+    "min": 5,
+    "sec": 45
 }
 ```
 
