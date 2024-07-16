@@ -22,22 +22,33 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PaceHandler = PaceHandler;
 const constants = __importStar(require("../constants"));
-const express_1 = __importDefault(require("express"));
-const times_1 = require("./times");
-const pace_1 = require("./pace");
-const home_1 = require("./home");
-// Create an Express router
-const router = express_1.default.Router();
-// Serve the paths of the pace-calculator endpoint
-router.get(constants.ROOT, home_1.Home);
-// Distance calculation routes
-router.use(constants.ENDPOINT_DISTANCES, times_1.CalculateTimeHandler);
-router.use(constants.ENDPOINT_SPECIFIED_DISTANCE, times_1.CalculateSpecifiedDistanceTimeHandler);
-// Pace calculation route
-router.use(constants.ENDPOINT_PACE, pace_1.PaceHandler);
-module.exports = router;
+const functions_1 = require("../helpers/functions");
+// PaceHandler is the handler function for the /pace endpoint. It only accepts POST requests.
+function PaceHandler(req, res) {
+    if (req.method === constants.HTTP_METHOD_POST) {
+        CalculatePace(req, res);
+    }
+    else {
+        res.status(constants.HTTP_STATUS_METHOD_NOT_ALLOWED).send(constants.TEXT_METHOD_NOT_ALLOWED);
+    }
+}
+// CalculatePace is the function to calculate the pace given a distance and a time
+function CalculatePace(req, res) {
+    const { distance, time } = req.body;
+    // Validation of the input parameters
+    if (distance <= 0 || time < 0) {
+        res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
+    }
+    // Calculate the pace in minutes per kilometer
+    const pace = time / distance;
+    // Seperate the fraction from the integer
+    const minutes = Math.floor(pace);
+    const seconds = Math.round((pace - minutes) * 60);
+    res.json({
+        "minutes": (0, functions_1.FormatNumber)(minutes),
+        "seconds": (0, functions_1.FormatNumber)(seconds)
+    });
+}

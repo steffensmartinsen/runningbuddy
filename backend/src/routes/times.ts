@@ -29,8 +29,7 @@ export function CalculateSpecifiedDistanceTimeHandler(req: Request, res: Respons
 function CalculateTimes (req: Request, res: Response): void {
 
     // Extract the minute and seconds from the POST request body
-    let min = req.body.minutes;
-    let sec = req.body.seconds;
+    const { min, sec } = req.body;
 
     // Validate the input parameters
     if (!ValidateTime(min, sec)) {
@@ -73,9 +72,7 @@ function CalculateTimes (req: Request, res: Response): void {
 // CalculatedSpecifiedDistance is the function that calculates the pace for a specified distance based on the input parameters
 function CalculateSpecifiedDistance(req: Request, res: Response): void {
     // Extract the distance, minute and seconds from the POST request body
-    let distance = req.body.distance;
-    let min = req.body.minutes;
-    let sec = req.body.seconds;
+    const { distance, min, sec } = req.body;
 
     // Validate the input parameters
     if (!ValidateTime(min, sec) || distance <= 0) {        

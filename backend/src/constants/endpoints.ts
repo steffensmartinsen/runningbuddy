@@ -14,3 +14,6 @@ export const ENDPOINT_DISTANCES = '/distances';
 
 // ENDPOINT_SPECIFIED_DISTANCE is the path to the specified distance endpoint
 export const ENDPOINT_SPECIFIED_DISTANCE = '/specified-distance';
+
+// ENDPOINT_PACE is the path to the pace endpoint
+export const ENDPOINT_PACE = '/pace';

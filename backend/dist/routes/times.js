@@ -48,8 +48,7 @@ function CalculateSpecifiedDistanceTimeHandler(req, res) {
 // CalculateTimes is the function that calculates the pace for each distance based on the input parameters
 function CalculateTimes(req, res) {
     // Extract the minute and seconds from the POST request body
-    let min = req.body.minutes;
-    let sec = req.body.seconds;
+    const { min, sec } = req.body;
     // Validate the input parameters
     if (!(0, functions_1.ValidateTime)(min, sec)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
@@ -86,26 +85,18 @@ function CalculateTimes(req, res) {
 // CalculatedSpecifiedDistance is the function that calculates the pace for a specified distance based on the input parameters
 function CalculateSpecifiedDistance(req, res) {
     // Extract the distance, minute and seconds from the POST request body
-    let distance = req.body.distance;
-    let min = req.body.minutes;
-    let sec = req.body.seconds;
-    console.log(min);
-    console.log(sec);
+    const { distance, min, sec } = req.body;
     // Validate the input parameters
     if (!(0, functions_1.ValidateTime)(min, sec) || distance <= 0) {
-        console.log((0, functions_1.ValidateTime)(min, sec));
-        console.log(distance);
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
         return;
     }
     // Calculate the pace for the specified distance
     let pace = CalculateTime(distance, min, sec);
     res.json({
-        "Pace": {
-            hours: (0, functions_1.FormatNumber)(pace.hours),
-            minutes: (0, functions_1.FormatNumber)(pace.minutes),
-            seconds: (0, functions_1.FormatNumber)(pace.seconds)
-        }
+        hours: (0, functions_1.FormatNumber)(pace.hours),
+        minutes: (0, functions_1.FormatNumber)(pace.minutes),
+        seconds: (0, functions_1.FormatNumber)(pace.seconds)
     });
 }
 // CalculateTime calculates the time it takes to run a distance based on the input parameters
