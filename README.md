@@ -14,7 +14,7 @@ The service serves the following endpoints:
 * `pace-calculator/pace`
 * `pace-calculator/distance`
 
-## times
+## `/times`
 
 The `times` endpoint recieves a *min* and *sec* input parameter from the request body, and calculates the times for the most popular distances: 5K, 10K, Half-Marathon, and Marathon. These times are returned in JSON format for these distances (see example response body).
 
@@ -57,7 +57,7 @@ The *sec* input parameter must be less than 60, and both input parameters must b
 }
 ```
 
-## specified-distance
+## `/specified-distance`
 The `specified-distance` endpoint recieves a *distance*, *min* and *sec* input parameter from the request body, and calculates the running time for the provided distance given the provided pace (min and sec). The time for this distance is then returned in JSON format (see example response body).
 
 The *distances* input parameter is the distances in kilometers. The *sec* parameter must be less than 60, and all input parameters must be greater or equal to 0.
@@ -85,7 +85,7 @@ The *distances* input parameter is the distances in kilometers. The *sec* parame
 }
 ```
 
-## pace
+## `/pace`
 The `pace` endpoint receives a *distance* and *time* input parameter from the request body, and calculates the pace of the run given the provided input parameters. The pace is then returned in JSON format (see example response body).
 
 Both the input parameters must be greater than 0.
@@ -109,7 +109,7 @@ Both the input parameters must be greater than 0.
 }
 ```
 
-## distance
+## `/distance`
 The `distance` endpoint receives a *time* object and a *pace* object, both containing numbers representing time units. For *time* hour is included, whereas *pace* only contains minutes and seconds. The endpoint calculates the distance ran given the running time and pace, and returns the distance in JSON format (see example response body).
 
 All input must be greater than or equal to 0. Running time's *min* must be less than 60, and *sec* for both objects must be less than 60.
