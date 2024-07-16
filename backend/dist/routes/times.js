@@ -24,6 +24,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CalculateTimeHandler = CalculateTimeHandler;
+exports.CalculateSpecifiedDistanceTimeHandler = CalculateSpecifiedDistanceTimeHandler;
 const constants = __importStar(require("../constants"));
 const functions_1 = require("../helpers/functions");
 // CalculateTimesHandler is the function that serves the '/pace-calculator/distances' path. It only accepts POST requests.
@@ -35,13 +36,22 @@ function CalculateTimeHandler(req, res) {
         res.status(constants.HTTP_STATUS_METHOD_NOT_ALLOWED).send(constants.TEXT_METHOD_NOT_ALLOWED);
     }
 }
+// CalculateSpecifiedDistanceTimeHandler is the function that serves the '/pace-calculator/specified-distance/' path. It only accepts POST requests.
+function CalculateSpecifiedDistanceTimeHandler(req, res) {
+    if (req.method === constants.HTTP_METHOD_POST) {
+        CalculateSpecifiedDistance(req, res);
+    }
+    else {
+        res.status(constants.HTTP_STATUS_METHOD_NOT_ALLOWED).send(constants.TEXT_METHOD_NOT_ALLOWED);
+    }
+}
 // CalculateTimes is the function that calculates the pace for each distance based on the input parameters
 function CalculateTimes(req, res) {
     // Extract the minute and seconds from the POST request body
     let min = req.body.minutes;
     let sec = req.body.seconds;
     // Validate the input parameters
-    if (min < 0 || sec < 0 || sec >= 60) {
+    if (!(0, functions_1.ValidateTime)(min, sec)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
         return;
     }
@@ -70,6 +80,31 @@ function CalculateTimes(req, res) {
             hours: (0, functions_1.FormatNumber)(paceMarathon.hours),
             minutes: (0, functions_1.FormatNumber)(paceMarathon.minutes),
             seconds: (0, functions_1.FormatNumber)(paceMarathon.seconds)
+        }
+    });
+}
+// CalculatedSpecifiedDistance is the function that calculates the pace for a specified distance based on the input parameters
+function CalculateSpecifiedDistance(req, res) {
+    // Extract the distance, minute and seconds from the POST request body
+    let distance = req.body.distance;
+    let min = req.body.minutes;
+    let sec = req.body.seconds;
+    console.log(min);
+    console.log(sec);
+    // Validate the input parameters
+    if (!(0, functions_1.ValidateTime)(min, sec) || distance <= 0) {
+        console.log((0, functions_1.ValidateTime)(min, sec));
+        console.log(distance);
+        res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
+        return;
+    }
+    // Calculate the pace for the specified distance
+    let pace = CalculateTime(distance, min, sec);
+    res.json({
+        "Pace": {
+            hours: (0, functions_1.FormatNumber)(pace.hours),
+            minutes: (0, functions_1.FormatNumber)(pace.minutes),
+            seconds: (0, functions_1.FormatNumber)(pace.seconds)
         }
     });
 }

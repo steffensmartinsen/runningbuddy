@@ -35,4 +35,5 @@ const router = express_1.default.Router();
 // Serve the paths of the pace-calculator endpoint
 router.get(constants.ROOT, home_1.Home);
 router.use(constants.ENDPOINT_DISTANCES, times_1.CalculateTimeHandler);
+router.use(constants.ENDPOINT_SPECIFIED_DISTANCE, times_1.CalculateSpecifiedDistanceTimeHandler);
 module.exports = router;

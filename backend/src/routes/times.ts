@@ -1,12 +1,23 @@
 import { Request, Response } from 'express';
 import * as constants from '../constants';
-import { DistanceTime } from '../structs/distance-structs';
-import { FormatNumber } from '../helpers/functions';
+import { DistanceTime } from '../structs/times-structs';
+import { FormatNumber, ValidateTime } from '../helpers/functions';
 
 // CalculateTimesHandler is the function that serves the '/pace-calculator/distances' path. It only accepts POST requests.
 export function CalculateTimeHandler(req: Request, res: Response): void {
     if (req.method === constants.HTTP_METHOD_POST) {
         CalculateTimes(req, res);
+    } else {
+        res.status(constants.HTTP_STATUS_METHOD_NOT_ALLOWED).send(
+            constants.TEXT_METHOD_NOT_ALLOWED
+        );
+    }
+}
+
+// CalculateSpecifiedDistanceTimeHandler is the function that serves the '/pace-calculator/specified-distance/' path. It only accepts POST requests.
+export function CalculateSpecifiedDistanceTimeHandler(req: Request, res: Response): void {
+    if (req.method === constants.HTTP_METHOD_POST) {
+        CalculateSpecifiedDistance(req, res);
     } else {
         res.status(constants.HTTP_STATUS_METHOD_NOT_ALLOWED).send(
             constants.TEXT_METHOD_NOT_ALLOWED
@@ -22,8 +33,10 @@ function CalculateTimes (req: Request, res: Response): void {
     let sec = req.body.seconds;
 
     // Validate the input parameters
-    if (min < 0 || sec < 0 || sec >= 60) {
-        res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
+    if (!ValidateTime(min, sec)) {
+        res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
+            constants.INVALID_INPUT
+        );
         return;
     }
 
@@ -56,6 +69,34 @@ function CalculateTimes (req: Request, res: Response): void {
         }
     });
 }
+
+// CalculatedSpecifiedDistance is the function that calculates the pace for a specified distance based on the input parameters
+function CalculateSpecifiedDistance(req: Request, res: Response): void {
+    // Extract the distance, minute and seconds from the POST request body
+    let distance = req.body.distance;
+    let min = req.body.minutes;
+    let sec = req.body.seconds;
+
+    // Validate the input parameters
+    if (!ValidateTime(min, sec) || distance <= 0) {        
+        res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
+            constants.INVALID_INPUT
+        );
+        return;
+    }
+
+    // Calculate the pace for the specified distance
+    let pace = CalculateTime(distance, min, sec);
+
+    res.json({
+        "Pace": {
+            hours: FormatNumber(pace.hours),
+            minutes: FormatNumber(pace.minutes),
+            seconds: FormatNumber(pace.seconds)
+        }
+    });
+}
+
 
 // CalculateTime calculates the time it takes to run a distance based on the input parameters
 // distance: the distance to calculate the time for
