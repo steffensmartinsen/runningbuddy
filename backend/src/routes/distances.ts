@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import * as constants from '../constants';
 import { DistanceTime } from '../structs/distance-structs';
 
-// PaceCalculatorPOST is the function that serves the '/pace-calculator' path
-export function PaceCalculatorPOST (req: Request, res: Response): void {
+// PaceCalculatorPOST is the function that serves the '/pace-calculator/distances' path
+export function DistanceTimesPOST (req: Request, res: Response): void {
 
     // TODO Add validation for the input parameters (seconds not more than 60, etc.)
 
