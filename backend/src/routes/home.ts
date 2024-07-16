@@ -4,6 +4,6 @@ import { Request, Response } from 'express';
 export function Home (req: Request, res: Response): void {
 
     res.json({
-        message: "This service root path is not serviced. See the documentation for endpoints to invoke"
+        message: "This path is not served. See the documentation for endpoints to invoke."
     })
 }

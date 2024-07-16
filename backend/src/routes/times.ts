@@ -1,15 +1,33 @@
 import { Request, Response } from 'express';
 import * as constants from '../constants';
 import { DistanceTime } from '../structs/distance-structs';
+import { FormatNumber } from '../helpers/functions';
 
-// PaceCalculatorPOST is the function that serves the '/pace-calculator/distances' path
-export function DistanceTimesPOST (req: Request, res: Response): void {
+// CalculateTimesHandler is the function that serves the '/pace-calculator/distances' path. It only accepts POST requests.
+export function CalculateTimeHandler(req: Request, res: Response): void {
+    if (req.method === constants.HTTP_METHOD_POST) {
+        CalculateTimes(req, res);
+    } else {
+        res.status(constants.HTTP_STATUS_METHOD_NOT_ALLOWED).send(
+            constants.TEXT_METHOD_NOT_ALLOWED
+        );
+    }
+}
 
-    // TODO Add validation for the input parameters (seconds not more than 60, etc.)
+// CalculateTimes is the function that calculates the pace for each distance based on the input parameters
+function CalculateTimes (req: Request, res: Response): void {
 
+    // Extract the minute and seconds from the POST request body
     let min = req.body.minutes;
     let sec = req.body.seconds;
 
+    // Validate the input parameters
+    if (min < 0 || sec < 0 || sec >= 60) {
+        res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
+        return;
+    }
+
+    // Calculate the pace for each distance
     let pace5k = CalculateTime(constants.DISTANCE_FIVE_K, min, sec);
     let pace10k = CalculateTime(constants.DISTANCE_TEN_K, min, sec);
     let paceHalfMarathon = CalculateTime(constants.DISTANCE_HALF_MARATHON, min, sec);
@@ -17,23 +35,24 @@ export function DistanceTimesPOST (req: Request, res: Response): void {
 
     res.json({
         "5K": {
-            minutes: pace5k.minutes,
-            seconds: pace5k.seconds
+            hours: FormatNumber(pace5k.hours),
+            minutes: FormatNumber(pace5k.minutes),
+            seconds: FormatNumber(pace5k.seconds)
         },
         "10K": {
-            hours: pace10k.hours,
-            minutes: pace10k.minutes,
-            seconds: pace10k.seconds
+            hours: FormatNumber(pace10k.hours),
+            minutes: FormatNumber(pace10k.minutes),
+            seconds: FormatNumber(pace10k.seconds)
         },
         "Half Marathon": {
-            hours: paceHalfMarathon.hours,
-            minutes: paceHalfMarathon.minutes,
-            seconds: paceHalfMarathon.seconds
+            hours: FormatNumber(paceHalfMarathon.hours),
+            minutes: FormatNumber(paceHalfMarathon.minutes),
+            seconds: FormatNumber(paceHalfMarathon.seconds)
         },
         "Marathon": {
-            hours: paceMarathon.hours,
-            minutes: paceMarathon.minutes,
-            seconds: paceMarathon.seconds
+            hours: FormatNumber(paceMarathon.hours),
+            minutes: FormatNumber(paceMarathon.minutes),
+            seconds: FormatNumber(paceMarathon.seconds)
         }
     });
 }

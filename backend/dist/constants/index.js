@@ -16,3 +16,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./endpoints"), exports);
 __exportStar(require("./pace-terms"), exports);
+__exportStar(require("./http"), exports);
