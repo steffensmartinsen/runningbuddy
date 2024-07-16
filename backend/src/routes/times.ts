@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as constants from '../constants';
 import { DistanceTime } from '../structs/calculation-structs';
-import { FormatNumber, ValidateTime } from '../helpers/functions';
+import { FormatNumber, ValidatePace } from '../helpers/functions';
 
 // CalculateTimesHandler is the function that serves the '/pace-calculator/times' path. It only accepts POST requests.
 export function CalculateTimeHandler(req: Request, res: Response): void {
@@ -32,7 +32,7 @@ function CalculateTimes (req: Request, res: Response): void {
     const { min, sec } = req.body;
 
     // Validate the input parameters
-    if (!ValidateTime(min, sec)) {
+    if (!ValidatePace(min, sec)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
             constants.INVALID_INPUT
         );
@@ -75,7 +75,7 @@ function CalculateSpecifiedDistance(req: Request, res: Response): void {
     const { distance, min, sec } = req.body;
 
     // Validate the input parameters
-    if (!ValidateTime(min, sec) || distance <= 0) {        
+    if (!ValidatePace(min, sec) || distance <= 0) {        
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
             constants.INVALID_INPUT
         );

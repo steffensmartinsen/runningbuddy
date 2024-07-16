@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as constants from '../constants';
+import { ValidatePace, ValidateTime } from '../helpers/functions';
 
 // DistanceHandler is the function that servers the /pace-calculator/distance endpoint. It only accepts POST requests.
 export function DistanceHandler(req: Request, res: Response): void {
@@ -23,6 +24,14 @@ function CalculateDistance(req: Request, res: Response): void {
     // Extract the pace input parameters
     const paceMin = req.body.pace.min;
     const paceSec = req.body.pace.sec;
+
+    // Validate the input parameters
+    if (!ValidatePace(paceMin, paceSec) || !ValidateTime(runningHour, runningMin, runningSec)) {
+        res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
+            constants.INVALID_INPUT
+        );
+        return;
+    }
 
     // Calculate running time to seconds
     const runInSeconds = ((runningHour * constants.MINUTES_IN_HOUR) * constants.SECONDS_IN_MINUTE) 

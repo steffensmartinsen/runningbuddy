@@ -8,7 +8,12 @@ export function FormatNumber(num: number): string {
     return num.toString();
 }
 
-// ValidateTime validates the input parameters for running pace
-export function ValidateTime(min: number, sec: number): boolean {
+// ValidatePace validates the input parameters for running pace
+export function ValidatePace(min: number, sec: number): boolean {
     return min >= 0 && sec >= 0 && sec < 60;
+}
+
+// ValidateTime validates the input parameters for running time
+export function ValidateTime(hour: number, min: number, sec: number): boolean {
+    return hour >= 0 && min >= 0 && sec >= 0 && min < 60 && sec < 60;
 }

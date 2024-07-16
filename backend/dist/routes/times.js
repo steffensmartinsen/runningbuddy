@@ -27,7 +27,7 @@ exports.CalculateTimeHandler = CalculateTimeHandler;
 exports.CalculateSpecifiedDistanceTimeHandler = CalculateSpecifiedDistanceTimeHandler;
 const constants = __importStar(require("../constants"));
 const functions_1 = require("../helpers/functions");
-// CalculateTimesHandler is the function that serves the '/pace-calculator/distances' path. It only accepts POST requests.
+// CalculateTimesHandler is the function that serves the '/pace-calculator/times' path. It only accepts POST requests.
 function CalculateTimeHandler(req, res) {
     if (req.method === constants.HTTP_METHOD_POST) {
         CalculateTimes(req, res);
