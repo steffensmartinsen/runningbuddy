@@ -3,7 +3,7 @@ import * as constants from '../constants';
 import { DistanceTime } from '../structs/calculation-structs';
 import { FormatNumber, ValidateTime } from '../helpers/functions';
 
-// CalculateTimesHandler is the function that serves the '/pace-calculator/distances' path. It only accepts POST requests.
+// CalculateTimesHandler is the function that serves the '/pace-calculator/times' path. It only accepts POST requests.
 export function CalculateTimeHandler(req: Request, res: Response): void {
     if (req.method === constants.HTTP_METHOD_POST) {
         CalculateTimes(req, res);

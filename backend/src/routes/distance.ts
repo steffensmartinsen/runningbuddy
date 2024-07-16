@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as constants from '../constants';
-import { FormatNumber } from '../helpers/functions';
 
+// DistanceHandler is the function that servers the /pace-calculator/distance endpoint. It only accepts POST requests.
 export function DistanceHandler(req: Request, res: Response): void {
     if (req.method === constants.HTTP_METHOD_POST) {
         CalculateDistance(req, res);
@@ -12,6 +12,7 @@ export function DistanceHandler(req: Request, res: Response): void {
     }
 }
 
+// CalculateDistance is the function that calculates the distance based on the running time and pace.
 function CalculateDistance(req: Request, res: Response): void {
 
     // Extract the running time input paramteres
