@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as constants from '../constants';
-import { DistanceTime } from '../structs/times-structs';
+import { DistanceTime } from '../structs/calculation-structs';
 import { FormatNumber, ValidateTime } from '../helpers/functions';
 
 // CalculateTimesHandler is the function that serves the '/pace-calculator/distances' path. It only accepts POST requests.
@@ -89,11 +89,9 @@ function CalculateSpecifiedDistance(req: Request, res: Response): void {
     let pace = CalculateTime(distance, min, sec);
 
     res.json({
-        "Pace": {
-            hours: FormatNumber(pace.hours),
-            minutes: FormatNumber(pace.minutes),
-            seconds: FormatNumber(pace.seconds)
-        }
+        hours: FormatNumber(pace.hours),
+        minutes: FormatNumber(pace.minutes),
+        seconds: FormatNumber(pace.seconds)
     });
 }
 
