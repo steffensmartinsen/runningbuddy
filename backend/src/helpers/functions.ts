@@ -20,7 +20,7 @@ export function ValidateTime(hour: number, min: number, sec: number): boolean {
 }
 
 // PaceKmtoPaceMile converts a pace from minutes per kilometer to minutes per mile
-export function PaceKmtoPaceMile(min: number, sec: number): [number, number] {
+export function PaceKmToPaceMile(min: number, sec: number): [number, number] {
     
     // Convert the pace to seconds
     const paceKm = (min * constants.SECONDS_IN_MINUTE + sec);
@@ -29,19 +29,21 @@ export function PaceKmtoPaceMile(min: number, sec: number): [number, number] {
     let paceMile = paceKm * constants.KM_TO_MILE_CONVERSION;
 
     let [minute, second] = extractMinAndSec(paceMile);
-
-    // let minute = paceMile / 60;
-    // let second = (minute - Math.floor(minute)) * 60;
-    // minute = Math.floor(minute);
-    // second = Math.round(second);
-
     return [minute, second];
 
 }
 
-export function PaceMileToPaceKm(min: number, sec: number) [number, number] {
+// PaceMileToPaceKm converts a pace from minutes per mile to minutes per kilometer
+export function PaceMileToPaceKm(min: number, sec: number): [number, number] {
+    
+    // Convert the pace to seconds
+    const paceMile = (min*constants.SECONDS_IN_MINUTE) + sec;
 
+    // Divide the pace by the conversion factor
+    const paceKm = paceMile / constants.KM_TO_MILE_CONVERSION;
 
+    const [minute, second] = extractMinAndSec(paceKm);
+    return [minute, second];
 }
 
 // extractMinAndSec extracts the minutes and seconds from a pace and returns them as a tuple
