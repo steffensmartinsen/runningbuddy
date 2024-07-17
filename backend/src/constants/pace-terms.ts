@@ -11,3 +11,6 @@ export const DISTANCE_TEN_K = 10;
 export const DISTANCE_HALF_MARATHON = 21.097;
 
 export const DISTANCE_MARATHON = 42.195;
+
+// KM_TO_MILE_CONVERSION is the conversion factor between miles and kilometers
+export const KM_TO_MILE_CONVERSION = 1.60934;

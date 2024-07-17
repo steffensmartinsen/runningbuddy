@@ -1,3 +1,4 @@
+import * as constants from '../constants/';
 // Desc: Helper functions used throughout the application
 
 // FormatNumber formats a number to have a leading zero if it is less than 10
@@ -16,4 +17,39 @@ export function ValidatePace(min: number, sec: number): boolean {
 // ValidateTime validates the input parameters for running time
 export function ValidateTime(hour: number, min: number, sec: number): boolean {
     return hour >= 0 && min >= 0 && sec >= 0 && min < 60 && sec < 60;
+}
+
+// PaceKmtoPaceMile converts a pace from minutes per kilometer to minutes per mile
+export function PaceKmtoPaceMile(min: number, sec: number): [number, number] {
+    
+    // Convert the pace to seconds
+    const paceKm = (min * constants.SECONDS_IN_MINUTE + sec);
+
+    // Multiply the pace by the conversion factor
+    let paceMile = paceKm * constants.KM_TO_MILE_CONVERSION;
+
+    let [minute, second] = extractMinAndSec(paceMile);
+
+    // let minute = paceMile / 60;
+    // let second = (minute - Math.floor(minute)) * 60;
+    // minute = Math.floor(minute);
+    // second = Math.round(second);
+
+    return [minute, second];
+
+}
+
+export function PaceMileToPaceKm(min: number, sec: number) [number, number] {
+
+
+}
+
+// extractMinAndSec extracts the minutes and seconds from a pace and returns them as a tuple
+function extractMinAndSec(pace: number): [number, number] {
+    let minute = pace / 60;
+    let second = (minute - Math.floor(minute)) * 60;
+    minute = Math.floor(minute);
+    second = Math.round(second);
+
+    return [minute, second];
 }
