@@ -75,7 +75,7 @@ function CalculateSpecifiedDistance(req: Request, res: Response): void {
     const { unit, distance, min, sec } = req.body;
 
     // Validate the input parameters
-    if (!ValidatePace(min, sec) || distance <= 0) {        
+    if (!ValidatePace(min, sec) || distance <= 0 || !ValidateUnits(unit)) {        
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
             constants.INVALID_INPUT
         );
@@ -99,6 +99,9 @@ function CalculateSpecifiedDistance(req: Request, res: Response): void {
 // min: the minutes to calculate the time for
 // seconds: the seconds to calculate the time for
 function CalculateTime(unit: string, distance: number, min: number, sec: number): DistanceTime {
+
+    // TODO Add support for combining miles and km for distance and pace
+    // "unit" per now is obsolete
 
     // Combine the time to work with seconds
     let pace = (min * constants.SECONDS_IN_MINUTE) + sec;

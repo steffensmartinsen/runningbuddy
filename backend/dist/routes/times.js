@@ -87,7 +87,7 @@ function CalculateSpecifiedDistance(req, res) {
     // Extract the distance, minute and seconds from the POST request body
     const { unit, distance, min, sec } = req.body;
     // Validate the input parameters
-    if (!(0, functions_1.ValidatePace)(min, sec) || distance <= 0) {
+    if (!(0, functions_1.ValidatePace)(min, sec) || distance <= 0 || !(0, functions_1.ValidateUnits)(unit)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
         return;
     }
@@ -107,6 +107,7 @@ function CalculateSpecifiedDistance(req, res) {
 function CalculateTime(unit, distance, min, sec) {
     // Combine the time to work with seconds
     let pace = (min * constants.SECONDS_IN_MINUTE) + sec;
+    console.log(pace);
     // Handle the common distances in KM
     if (unit === constants.UNIT_MILES && constants.DISTANCES_ARRAY.includes(distance)) {
         pace = (0, functions_1.PaceMileToPaceKm)(pace);

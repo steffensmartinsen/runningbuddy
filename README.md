@@ -23,6 +23,7 @@ The *sec* input parameter must be less than 60, and both input parameters must b
 **Example Request Body:**
 ```
 {
+    "unit": "km",
     "min": 5,
     "sec": 50
 }
@@ -58,13 +59,14 @@ The *sec* input parameter must be less than 60, and both input parameters must b
 ```
 
 ## `/specified-distance`
-The `specified-distance` endpoint recieves a *distance*, *min* and *sec* input parameter from the request body, and calculates the running time for the provided distance given the provided pace (min and sec). The time for this distance is then returned in JSON format (see example response body).
+The `specified-distance` endpoint recieves a *unit*, *distance*, *min* and *sec* input parameter from the request body, and calculates the running time for the provided distance given the provided pace (min and sec). The time for this distance is then returned in JSON format (see example response body). The unit parameter must be either `miles` or `km`. 
 
-The *distances* input parameter is the distances in kilometers. The *sec* parameter must be less than 60, and all input parameters must be greater or equal to 0.
+The *distances* input parameter is the distances in kilometers or miles (based on `unit`). The *sec* parameter must be less than 60, and all input parameters must be greater or equal to 0.
 
 **Example Request Body:**
 ```
 {
+    "unit": "km",
     "distance": 8.45,
     "min": 5,
     "sec": 45
@@ -77,11 +79,9 @@ The *distances* input parameter is the distances in kilometers. The *sec* parame
 **Example Response Body:**
 ```
 {
-    "Pace": {
-        "hours": "00",
-        "minutes": "48",
-        "seconds": "35"
-    }
+    "hours": "00",
+    "minutes": "48",
+    "seconds": "35"
 }
 ```
 
