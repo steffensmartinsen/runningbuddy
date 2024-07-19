@@ -39,7 +39,7 @@ function PaceHandler(req, res) {
 function CalculatePace(req, res) {
     const { distance, time } = req.body;
     // Validation of the input parameters
-    if (distance <= 0 || time < 0) {
+    if (distance < 0 || time < 0) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
     }
     // Calculate the pace in minutes per kilometer

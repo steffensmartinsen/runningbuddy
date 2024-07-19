@@ -25,6 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DistanceHandler = DistanceHandler;
 const constants = __importStar(require("../constants"));
+const functions_1 = require("../helpers/functions");
 // DistanceHandler is the function that servers the /pace-calculator/distance endpoint. It only accepts POST requests.
 function DistanceHandler(req, res) {
     if (req.method === constants.HTTP_METHOD_POST) {
@@ -43,6 +44,11 @@ function CalculateDistance(req, res) {
     // Extract the pace input parameters
     const paceMin = req.body.pace.min;
     const paceSec = req.body.pace.sec;
+    // Validate the input parameters
+    if (!(0, functions_1.ValidatePace)(paceMin, paceSec) || !(0, functions_1.ValidateTime)(runningHour, runningMin, runningSec)) {
+        res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
+        return;
+    }
     // Calculate running time to seconds
     const runInSeconds = ((runningHour * constants.MINUTES_IN_HOUR) * constants.SECONDS_IN_MINUTE)
         + (runningMin * constants.SECONDS_IN_MINUTE)
