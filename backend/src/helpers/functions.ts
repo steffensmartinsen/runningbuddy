@@ -19,6 +19,10 @@ export function ValidateTime(hour: number, min: number, sec: number): boolean {
     return hour >= 0 && min >= 0 && sec >= 0 && min < 60 && sec < 60;
 }
 
+export function ValidateUnits(unit: string): boolean {
+    return unit === constants.UNIT_KM || unit === constants.UNIT_MILES;
+}
+
 // PaceKmtoPaceMile converts a pace from minutes per kilometer to minutes per mile
 export function PaceKmToPaceMile(pace: number): number {
 

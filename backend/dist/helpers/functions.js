@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FormatNumber = FormatNumber;
 exports.ValidatePace = ValidatePace;
 exports.ValidateTime = ValidateTime;
+exports.ValidateUnits = ValidateUnits;
 exports.PaceKmToPaceMile = PaceKmToPaceMile;
 exports.PaceMileToPaceKm = PaceMileToPaceKm;
 const constants = __importStar(require("../constants/"));
@@ -45,6 +46,9 @@ function ValidatePace(min, sec) {
 function ValidateTime(hour, min, sec) {
     return hour >= 0 && min >= 0 && sec >= 0 && min < 60 && sec < 60;
 }
+function ValidateUnits(unit) {
+    return unit === constants.UNIT_KM || unit === constants.UNIT_MILES;
+}
 // PaceKmtoPaceMile converts a pace from minutes per kilometer to minutes per mile
 function PaceKmToPaceMile(pace) {
     // Multiply the pace by the conversion factor
@@ -53,10 +57,8 @@ function PaceKmToPaceMile(pace) {
 }
 // PaceMileToPaceKm converts a pace from minutes per mile to minutes per kilometer
 function PaceMileToPaceKm(pace) {
-    console.log(pace);
     // Divide the pace by the conversion factor
     const paceKm = pace * constants.MILE_TO_KM_CONVERSION;
-    console.log("paceKm", paceKm);
     return paceKm;
 }
 // extractMinAndSec extracts the minutes and seconds from a pace and returns them as a tuple
@@ -65,6 +67,6 @@ function extractMinAndSec(pace) {
     let second = (minute - Math.floor(minute)) * 60;
     minute = Math.floor(minute);
     second = Math.round(second);
-    // TODO Revisit
+    // TODO Revisit --- even needed?
     return [minute, second];
 }

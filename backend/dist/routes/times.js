@@ -50,7 +50,7 @@ function CalculateTimes(req, res) {
     // Extract the minute and seconds from the POST request body
     const { unit, min, sec, } = req.body;
     // Validate the input parameters
-    if (!(0, functions_1.ValidatePace)(min, sec)) {
+    if (!(0, functions_1.ValidatePace)(min, sec) || !(0, functions_1.ValidateUnits)(unit)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
         return;
     }
@@ -105,11 +105,6 @@ function CalculateSpecifiedDistance(req, res) {
 // min: the minutes to calculate the time for
 // seconds: the seconds to calculate the time for
 function CalculateTime(unit, distance, min, sec) {
-    // TODO Add support for miles - potentially rewrite to separate 5k, 10k, half marathon and marathon
-    console.log("unit", unit);
-    console.log("distance", distance);
-    console.log("min", min);
-    console.log("sec", sec);
     // Combine the time to work with seconds
     let pace = (min * constants.SECONDS_IN_MINUTE) + sec;
     // Handle the common distances in KM

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as constants from '../constants';
 import { DistanceTime } from '../structs/calculation-structs';
-import { FormatNumber, ValidatePace, PaceMileToPaceKm } from '../helpers/functions';
+import { FormatNumber, ValidatePace, ValidateUnits, PaceMileToPaceKm } from '../helpers/functions';
 
 // CalculateTimesHandler is the function that serves the '/pace-calculator/times' path. It only accepts POST requests.
 export function CalculateTimeHandler(req: Request, res: Response): void {
@@ -32,7 +32,7 @@ function CalculateTimes (req: Request, res: Response): void {
     const {unit, min, sec, } = req.body;
 
     // Validate the input parameters
-    if (!ValidatePace(min, sec)) {
+    if (!ValidatePace(min, sec) || !ValidateUnits(unit)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
             constants.INVALID_INPUT
         );
@@ -99,11 +99,6 @@ function CalculateSpecifiedDistance(req: Request, res: Response): void {
 // min: the minutes to calculate the time for
 // seconds: the seconds to calculate the time for
 function CalculateTime(unit: string, distance: number, min: number, sec: number): DistanceTime {
-
-    console.log("unit", unit);
-    console.log("distance", distance);
-    console.log("min", min);
-    console.log("sec", sec);
 
     // Combine the time to work with seconds
     let pace = (min * constants.SECONDS_IN_MINUTE) + sec;
