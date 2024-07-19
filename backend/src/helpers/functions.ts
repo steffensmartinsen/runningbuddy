@@ -32,11 +32,8 @@ export function PaceKmToPaceMile(pace: number): number {
 // PaceMileToPaceKm converts a pace from minutes per mile to minutes per kilometer
 export function PaceMileToPaceKm(pace: number): number {
 
-    console.log(pace);
-
     // Divide the pace by the conversion factor
     const paceKm = pace * constants.MILE_TO_KM_CONVERSION;
-    console.log("paceKm", paceKm);
 
     return paceKm;
 }
@@ -48,7 +45,7 @@ function extractMinAndSec(pace: number): [number, number] {
     minute = Math.floor(minute);
     second = Math.round(second);
 
-    // TODO Revisit
+    // TODO Revisit --- even needed?
 
     return [minute, second];
 }

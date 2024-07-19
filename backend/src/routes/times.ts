@@ -99,8 +99,6 @@ function CalculateSpecifiedDistance(req: Request, res: Response): void {
 // min: the minutes to calculate the time for
 // seconds: the seconds to calculate the time for
 function CalculateTime(unit: string, distance: number, min: number, sec: number): DistanceTime {
-    
-    // TODO Add support for miles - potentially rewrite to separate 5k, 10k, half marathon and marathon
 
     console.log("unit", unit);
     console.log("distance", distance);
