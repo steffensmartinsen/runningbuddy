@@ -87,15 +87,21 @@ The *distances* input parameter is the distances in kilometers or miles (based o
 ```
 
 ## `/pace`
-The `pace` endpoint receives a *distance* and *time* input parameter from the request body, and calculates the pace of the run given the provided input parameters. The pace is then returned in JSON format (see example response body).
+The `pace` endpoint receives a *distanceUnit*, *distance*, *time* object, and *paceUnit* input parameter from the request body, and calculates the pace of the run given the provided input parameters. The pace is then returned in JSON format (see example response body). *distanceUnit* and *paceUnit* can either be `miles` or `km`. 
 
-Both the input parameters must be greater than 0.
+The *distance* parameter must be greater than 0, *time.min* and *time.sec* must be less than 60.
 
 **Example Request Body:**
 ```
 {
-    "distance": 3.5,
-    "time": 20
+    "distanceUnit": "miles",
+    "distance": 6,
+    "time": {
+        "hour": 0,
+        "min": 58,
+        "sec": 44
+    },
+    "paceUnit": "km"
 }
 ```
 
@@ -105,8 +111,8 @@ Both the input parameters must be greater than 0.
 **Example Response Body:**
 ```
 {
-    "minutes": "05",
-    "seconds": "43"
+    "minutes": "06",
+    "seconds": "05"
 }
 ```
 
