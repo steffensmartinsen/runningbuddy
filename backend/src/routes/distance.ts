@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as constants from '../constants';
-import { ValidatePace, ValidateTime, ValidateUnits } from '../helpers/functions';
+import { ValidatePace, ValidateTime } from '../helpers/functions';
 
 // DistanceHandler is the function that servers the /pace-calculator/distance endpoint. It only accepts POST requests.
 export function DistanceHandler(req: Request, res: Response): void {

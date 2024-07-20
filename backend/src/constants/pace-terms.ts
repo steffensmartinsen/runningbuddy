@@ -17,6 +17,7 @@ export const DISTANCES_ARRAY = [DISTANCE_FIVE_K, DISTANCE_TEN_K, DISTANCE_HALF_M
 // KM_TO_MILE_CONVERSION is the conversion factor between miles and kilometers
 export const KM_TO_MILE_CONVERSION = 1.60934;
 
+// MILE_TO_KM_CONVERSION is the conversion factor between kilometers and miles
 export const MILE_TO_KM_CONVERSION = 0.621371;
 
 // UNIT_MILES is the unit of measurement for miles

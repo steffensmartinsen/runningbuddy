@@ -26,7 +26,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CalculateTimeHandler = CalculateTimeHandler;
 exports.CalculateSpecifiedDistanceTimeHandler = CalculateSpecifiedDistanceTimeHandler;
 const constants = __importStar(require("../constants"));
-const functions_1 = require("../helpers/functions");
+const helpers = __importStar(require("../helpers/functions"));
+//import { FormatNumber, ValidatePace, ValidateUnit, PaceMileToPaceKm } from '../helpers/functions';
 // CalculateTimesHandler is the function that serves the '/pace-calculator/times' path. It only accepts POST requests.
 function CalculateTimeHandler(req, res) {
     if (req.method === constants.HTTP_METHOD_POST) {
@@ -50,7 +51,7 @@ function CalculateTimes(req, res) {
     // Extract the minute and seconds from the POST request body
     const { unit, min, sec, } = req.body;
     // Validate the input parameters
-    if (!(0, functions_1.ValidatePace)(min, sec) || !(0, functions_1.ValidateUnits)(unit)) {
+    if (!helpers.ValidatePace(min, sec) || !helpers.ValidateUnit(unit)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
         return;
     }
@@ -61,42 +62,55 @@ function CalculateTimes(req, res) {
     let paceMarathon = CalculateTime(unit, constants.DISTANCE_MARATHON, min, sec);
     res.json({
         "5K": {
-            hours: (0, functions_1.FormatNumber)(pace5k.hours),
-            minutes: (0, functions_1.FormatNumber)(pace5k.minutes),
-            seconds: (0, functions_1.FormatNumber)(pace5k.seconds)
+            hours: helpers.FormatNumber(pace5k.hours),
+            minutes: helpers.FormatNumber(pace5k.minutes),
+            seconds: helpers.FormatNumber(pace5k.seconds)
         },
         "10K": {
-            hours: (0, functions_1.FormatNumber)(pace10k.hours),
-            minutes: (0, functions_1.FormatNumber)(pace10k.minutes),
-            seconds: (0, functions_1.FormatNumber)(pace10k.seconds)
+            hours: helpers.FormatNumber(pace10k.hours),
+            minutes: helpers.FormatNumber(pace10k.minutes),
+            seconds: helpers.FormatNumber(pace10k.seconds)
         },
         "Half Marathon": {
-            hours: (0, functions_1.FormatNumber)(paceHalfMarathon.hours),
-            minutes: (0, functions_1.FormatNumber)(paceHalfMarathon.minutes),
-            seconds: (0, functions_1.FormatNumber)(paceHalfMarathon.seconds)
+            hours: helpers.FormatNumber(paceHalfMarathon.hours),
+            minutes: helpers.FormatNumber(paceHalfMarathon.minutes),
+            seconds: helpers.FormatNumber(paceHalfMarathon.seconds)
         },
         "Marathon": {
-            hours: (0, functions_1.FormatNumber)(paceMarathon.hours),
-            minutes: (0, functions_1.FormatNumber)(paceMarathon.minutes),
-            seconds: (0, functions_1.FormatNumber)(paceMarathon.seconds)
+            hours: helpers.FormatNumber(paceMarathon.hours),
+            minutes: helpers.FormatNumber(paceMarathon.minutes),
+            seconds: helpers.FormatNumber(paceMarathon.seconds)
         }
     });
 }
 // CalculatedSpecifiedDistance is the function that calculates the pace for a specified distance based on the input parameters
 function CalculateSpecifiedDistance(req, res) {
     // Extract the distance, minute and seconds from the POST request body
-    const { unit, distance, min, sec } = req.body;
+    const { distanceUnit, distance, paceUnit } = req.body;
+    let { min, sec } = req.body;
     // Validate the input parameters
-    if (!(0, functions_1.ValidatePace)(min, sec) || distance <= 0 || !(0, functions_1.ValidateUnits)(unit)) {
+    if (!helpers.ValidatePace(min, sec) || distance <= 0 || !helpers.ValidateUnit(distanceUnit)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
         return;
     }
+    // Handle case where distance is miles and pace is in km
+    if (distanceUnit === constants.UNIT_MILES && paceUnit === constants.UNIT_KM) {
+        const pace = helpers.PaceToSeconds(min, sec);
+        const paceMiles = helpers.PaceKmToPaceMile(pace);
+        [min, sec] = helpers.ExtractMinAndSec(paceMiles);
+    }
+    // Handle case where distance is km and pace is in miles
+    if (distanceUnit === constants.UNIT_KM && paceUnit === constants.UNIT_MILES) {
+        const pace = helpers.PaceToSeconds(min, sec);
+        const paceKm = helpers.PaceMileToPaceKm(pace);
+        [min, sec] = helpers.ExtractMinAndSec(paceKm);
+    }
     // Calculate the pace for the specified distance
-    let pace = CalculateTime(unit, distance, min, sec);
+    let pace = CalculateTime(distanceUnit, distance, min, sec);
     res.json({
-        hours: (0, functions_1.FormatNumber)(pace.hours),
-        minutes: (0, functions_1.FormatNumber)(pace.minutes),
-        seconds: (0, functions_1.FormatNumber)(pace.seconds)
+        hours: helpers.FormatNumber(pace.hours),
+        minutes: helpers.FormatNumber(pace.minutes),
+        seconds: helpers.FormatNumber(pace.seconds)
     });
 }
 // CalculateTime calculates the time it takes to run a distance based on the input parameters
@@ -105,12 +119,13 @@ function CalculateSpecifiedDistance(req, res) {
 // min: the minutes to calculate the time for
 // seconds: the seconds to calculate the time for
 function CalculateTime(unit, distance, min, sec) {
+    // TODO Add support for combining miles and km for distance and pace
+    // "unit" per now is obsolete
     // Combine the time to work with seconds
     let pace = (min * constants.SECONDS_IN_MINUTE) + sec;
-    console.log(pace);
     // Handle the common distances in KM
     if (unit === constants.UNIT_MILES && constants.DISTANCES_ARRAY.includes(distance)) {
-        pace = (0, functions_1.PaceMileToPaceKm)(pace);
+        pace = helpers.PaceMileToPaceKm(pace);
     }
     // Calculate the time it takes to run the distance
     let distance_time = pace * distance;

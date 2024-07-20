@@ -19,7 +19,7 @@ export function ValidateTime(hour: number, min: number, sec: number): boolean {
     return hour >= 0 && min >= 0 && sec >= 0 && min < 60 && sec < 60;
 }
 
-export function ValidateUnits(unit: string): boolean {
+export function ValidateUnit(unit: string): boolean {
     return unit === constants.UNIT_KM || unit === constants.UNIT_MILES;
 }
 
@@ -36,20 +36,23 @@ export function PaceKmToPaceMile(pace: number): number {
 // PaceMileToPaceKm converts a pace from minutes per mile to minutes per kilometer
 export function PaceMileToPaceKm(pace: number): number {
 
-    // Divide the pace by the conversion factor
+    // Multiply the pace by the conversion factor
     const paceKm = pace * constants.MILE_TO_KM_CONVERSION;
 
     return paceKm;
 }
 
+// PaceToSeconds converts a pace to seconds
+export function PaceToSeconds(min: number, sec: number): number {
+    return (min * constants.SECONDS_IN_MINUTE) + sec;
+}
+
 // extractMinAndSec extracts the minutes and seconds from a pace and returns them as a tuple
-function extractMinAndSec(pace: number): [number, number] {
+export function ExtractMinAndSec(pace: number): [number, number] {
     let minute = pace / 60;
     let second = (minute - Math.floor(minute)) * 60;
     minute = Math.floor(minute);
     second = Math.round(second);
-
-    // TODO Revisit --- even needed?
 
     return [minute, second];
 }

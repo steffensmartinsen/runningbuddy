@@ -11,6 +11,7 @@ exports.DISTANCE_MARATHON = 42.195;
 exports.DISTANCES_ARRAY = [exports.DISTANCE_FIVE_K, exports.DISTANCE_TEN_K, exports.DISTANCE_HALF_MARATHON, exports.DISTANCE_MARATHON];
 // KM_TO_MILE_CONVERSION is the conversion factor between miles and kilometers
 exports.KM_TO_MILE_CONVERSION = 1.60934;
+// MILE_TO_KM_CONVERSION is the conversion factor between kilometers and miles
 exports.MILE_TO_KM_CONVERSION = 0.621371;
 // UNIT_MILES is the unit of measurement for miles
 exports.UNIT_MILES = "miles";

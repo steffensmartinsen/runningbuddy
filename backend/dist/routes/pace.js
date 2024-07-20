@@ -37,9 +37,9 @@ function PaceHandler(req, res) {
 }
 // CalculatePace is the function to calculate the pace given a distance and a time
 function CalculatePace(req, res) {
-    const { distance, time } = req.body;
+    const { unit, distance, time } = req.body;
     // Validation of the input parameters
-    if (distance < 0 || time < 0) {
+    if (distance < 0 || time < 0 || !(0, functions_1.ValidateUnit)(unit)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
     }
     // Calculate the pace in minutes per kilometer

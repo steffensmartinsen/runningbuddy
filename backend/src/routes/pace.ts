@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as constants from '../constants';
-import { FormatNumber } from '../helpers/functions';
+import { FormatNumber, ValidateUnit } from '../helpers/functions';
 
 // PaceHandler is the handler function for the /pace endpoint. It only accepts POST requests.
 export function PaceHandler(req: Request, res: Response): void {
@@ -15,10 +15,10 @@ export function PaceHandler(req: Request, res: Response): void {
 
 // CalculatePace is the function to calculate the pace given a distance and a time
 function CalculatePace(req: Request, res: Response): void {
-    const { distance, time } = req.body;
+    const { unit, distance, time } = req.body;
 
     // Validation of the input parameters
-    if (distance < 0 || time < 0) {
+    if (distance < 0 || time < 0 || !ValidateUnit(unit)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
             constants.INVALID_INPUT
         );
