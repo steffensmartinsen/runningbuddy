@@ -28,3 +28,6 @@ export const UNIT_MILES = "miles";
 
 // UNIT_KM is the unit of measurement for kilometers
 export const UNIT_KM = "km";
+
+// ONE is used to pass the distance parameter validation in CalculateDistance function
+export const ONE = 1;

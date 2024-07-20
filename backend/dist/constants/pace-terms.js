@@ -1,7 +1,7 @@
 "use strict";
 // Desc: Constants related to terminology used in the application
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UNIT_KM = exports.UNIT_MILES = exports.CONVERSION_MILES_AND_KM = exports.DISTANCES_ARRAY = exports.DISTANCE_MARATHON = exports.DISTANCE_HALF_MARATHON = exports.DISTANCE_TEN_K = exports.DISTANCE_FIVE_K = exports.SECONDS_IN_MINUTE = exports.MINUTES_IN_HOUR = void 0;
+exports.ONE = exports.UNIT_KM = exports.UNIT_MILES = exports.CONVERSION_MILES_AND_KM = exports.DISTANCES_ARRAY = exports.DISTANCE_MARATHON = exports.DISTANCE_HALF_MARATHON = exports.DISTANCE_TEN_K = exports.DISTANCE_FIVE_K = exports.SECONDS_IN_MINUTE = exports.MINUTES_IN_HOUR = void 0;
 // MINUTES_IN_HOUR is the number of minutes in an hour
 exports.MINUTES_IN_HOUR = 60;
 // SECONDS_IN_MINUTE is the number of seconds in a minute
@@ -21,3 +21,5 @@ exports.CONVERSION_MILES_AND_KM = 1.609344;
 exports.UNIT_MILES = "miles";
 // UNIT_KM is the unit of measurement for kilometers
 exports.UNIT_KM = "km";
+// ONE is used to pass the distance parameter validation in CalculateDistance function
+exports.ONE = 1;

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import * as constants from '../constants';
 import { ValidatePace, ValidateTime, ValidateUnit, TimeToSeconds, PaceToSeconds, PaceMileToPaceKm, PaceKmToPaceMile } from '../helpers/functions';
+import * as helpers from '../helpers/functions';
 
 // DistanceHandler is the function that servers the /pace-calculator/distance endpoint. It only accepts POST requests.
 export function DistanceHandler(req: Request, res: Response): void {
@@ -29,7 +30,7 @@ function CalculateDistance(req: Request, res: Response): void {
     const paceSec = req.body.pace.sec;
 
     // Validate the input parameters
-    if (!ValidatePace(paceMin, paceSec) || !ValidateTime(runningHour, runningMin, runningSec) || !ValidateUnit(distanceUnit) || !ValidateUnit(paceUnit)){
+    if (!helpers.ValidateDistanceEndpoint(paceMin, paceSec, runningHour, runningMin, runningSec, distanceUnit, paceUnit)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
             constants.INVALID_INPUT
         );
@@ -37,21 +38,17 @@ function CalculateDistance(req: Request, res: Response): void {
     }
 
     // Calculate running time to seconds
-    const runInSeconds = TimeToSeconds(runningHour, runningMin, runningSec);
+    const runInSeconds = helpers.TimeToSeconds(runningHour, runningMin, runningSec);
     
     // Calculate pace to seconds
-    let paceInSeconds = PaceToSeconds(paceMin, paceSec);
+    let paceInSeconds = helpers.PaceToSeconds(paceMin, paceSec);
     console.log(paceInSeconds);
 
     if (distanceUnit === constants.UNIT_MILES && paceUnit === constants.UNIT_KM) {
-        paceInSeconds = PaceKmToPaceMile(paceInSeconds);
-        console.log("inside first if");
-        console.log(paceInSeconds);
+        paceInSeconds = helpers.PaceKmToPaceMile(paceInSeconds);
     }
     if (distanceUnit === constants.UNIT_KM && paceUnit === constants.UNIT_MILES) {
-        paceInSeconds = PaceMileToPaceKm(paceInSeconds);
-        console.log("inside second if");
-        console.log(paceInSeconds);
+        paceInSeconds = helpers.PaceMileToPaceKm(paceInSeconds);
     }
 
     // Calculate the distance and multiply it by 60 minutes

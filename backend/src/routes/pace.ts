@@ -19,7 +19,7 @@ function CalculatePace(req: Request, res: Response): void {
     const { distanceUnit, time, paceUnit } = req.body;
 
     // Validation of the input parameters
-    if (distance < 0 || !helpers.ValidateTime(time.hour, time.min, time.sec) || !helpers.ValidateUnit(distanceUnit) || !helpers.ValidateUnit(paceUnit)) {
+    if (!helpers.ValidatePaceEndpoint(distanceUnit, paceUnit, time.hour, time.min, time.sec, distance)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
             constants.INVALID_INPUT
         );

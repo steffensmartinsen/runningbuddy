@@ -27,6 +27,9 @@ exports.FormatNumber = FormatNumber;
 exports.ValidatePace = ValidatePace;
 exports.ValidateTime = ValidateTime;
 exports.ValidateUnit = ValidateUnit;
+exports.ValidateTimeEndpoint = ValidateTimeEndpoint;
+exports.ValidatePaceEndpoint = ValidatePaceEndpoint;
+exports.ValidateDistanceEndpoint = ValidateDistanceEndpoint;
 exports.PaceKmToPaceMile = PaceKmToPaceMile;
 exports.PaceMileToPaceKm = PaceMileToPaceKm;
 exports.PaceToSeconds = PaceToSeconds;
@@ -43,6 +46,7 @@ function FormatNumber(num) {
     }
     return num.toString();
 }
+// Validation functions
 // ValidatePace validates the input parameters for running pace
 function ValidatePace(min, sec) {
     return min >= 0 && sec >= 0 && sec < 60;
@@ -55,6 +59,18 @@ function ValidateTime(hour, min, sec) {
 function ValidateUnit(unit) {
     return unit === constants.UNIT_KM || unit === constants.UNIT_MILES;
 }
+// ValidateTimeEndpoint validates the input parameters for the /time endpoint
+function ValidateTimeEndpoint(unit, min, sec, distance) {
+    return ValidatePace(min, sec) && distance > 0 && ValidateUnit(unit);
+}
+// ValidatePaceEndpoint validates the input parameters for the /pace endpoint
+function ValidatePaceEndpoint(distanceUnit, paceUnit, hour, min, sec, distance) {
+    return ValidateTime(hour, min, sec) && distance > 0 && ValidateUnit(distanceUnit) && ValidateUnit(paceUnit);
+}
+function ValidateDistanceEndpoint(paceMin, paceSec, runHour, runMin, runSec, distanceUnit, paceUnit) {
+    return ValidatePace(paceMin, paceSec) && ValidateTime(runHour, runMin, runSec) && ValidateUnit(distanceUnit) && ValidateUnit(paceUnit);
+}
+// Running calculations functions
 // PaceKmtoPaceMile converts a pace from minutes per kilometer to minutes per mile
 function PaceKmToPaceMile(pace) {
     // Multiply the pace by the conversion factor

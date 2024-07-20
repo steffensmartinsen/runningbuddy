@@ -40,7 +40,7 @@ function CalculatePace(req, res) {
     let distance = req.body.distance;
     const { distanceUnit, time, paceUnit } = req.body;
     // Validation of the input parameters
-    if (distance < 0 || !helpers.ValidateTime(time.hour, time.min, time.sec) || !helpers.ValidateUnit(distanceUnit) || !helpers.ValidateUnit(paceUnit)) {
+    if (!helpers.ValidatePaceEndpoint(distanceUnit, paceUnit, time.hour, time.min, time.sec, distance)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
     }
     // Convert the time to minutes for the pace calculation

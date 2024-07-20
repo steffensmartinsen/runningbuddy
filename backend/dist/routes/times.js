@@ -51,7 +51,7 @@ function CalculateTimes(req, res) {
     // Extract the minute and seconds from the POST request body
     const { unit, min, sec, } = req.body;
     // Validate the input parameters
-    if (!helpers.ValidatePace(min, sec) || !helpers.ValidateUnit(unit)) {
+    if (!helpers.ValidateTimeEndpoint(unit, min, sec, constants.ONE)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
         return;
     }
@@ -89,7 +89,7 @@ function CalculateSpecifiedDistance(req, res) {
     const { distanceUnit, distance, paceUnit } = req.body;
     let { min, sec } = req.body;
     // Validate the input parameters
-    if (!helpers.ValidatePace(min, sec) || distance <= 0 || !helpers.ValidateUnit(distanceUnit)) {
+    if (!helpers.ValidateTimeEndpoint(distanceUnit, min, sec, distance)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
         return;
     }

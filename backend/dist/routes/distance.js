@@ -25,7 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DistanceHandler = DistanceHandler;
 const constants = __importStar(require("../constants"));
-const functions_1 = require("../helpers/functions");
+const helpers = __importStar(require("../helpers/functions"));
 // DistanceHandler is the function that servers the /pace-calculator/distance endpoint. It only accepts POST requests.
 function DistanceHandler(req, res) {
     if (req.method === constants.HTTP_METHOD_POST) {
@@ -47,22 +47,28 @@ function CalculateDistance(req, res) {
     const paceMin = req.body.pace.min;
     const paceSec = req.body.pace.sec;
     // Validate the input parameters
-    if (!(0, functions_1.ValidatePace)(paceMin, paceSec) || !(0, functions_1.ValidateTime)(runningHour, runningMin, runningSec) || !(0, functions_1.ValidateUnit)(distanceUnit) || !(0, functions_1.ValidateUnit)(paceUnit)) {
+    if (!helpers.ValidateDistanceEndpoint(paceMin, paceSec, runningHour, runningMin, runningSec, distanceUnit, paceUnit)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
         return;
     }
+    // if (!ValidatePace(paceMin, paceSec) || !ValidateTime(runningHour, runningMin, runningSec) || !ValidateUnit(distanceUnit) || !ValidateUnit(paceUnit)){
+    //     res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
+    //         constants.INVALID_INPUT
+    //     );
+    //     return;
+    // }
     // Calculate running time to seconds
-    const runInSeconds = (0, functions_1.TimeToSeconds)(runningHour, runningMin, runningSec);
+    const runInSeconds = helpers.TimeToSeconds(runningHour, runningMin, runningSec);
     // Calculate pace to seconds
-    let paceInSeconds = (0, functions_1.PaceToSeconds)(paceMin, paceSec);
+    let paceInSeconds = helpers.PaceToSeconds(paceMin, paceSec);
     console.log(paceInSeconds);
     if (distanceUnit === constants.UNIT_MILES && paceUnit === constants.UNIT_KM) {
-        paceInSeconds = (0, functions_1.PaceKmToPaceMile)(paceInSeconds);
+        paceInSeconds = helpers.PaceKmToPaceMile(paceInSeconds);
         console.log("inside first if");
         console.log(paceInSeconds);
     }
     if (distanceUnit === constants.UNIT_KM && paceUnit === constants.UNIT_MILES) {
-        paceInSeconds = (0, functions_1.PaceMileToPaceKm)(paceInSeconds);
+        paceInSeconds = helpers.PaceMileToPaceKm(paceInSeconds);
         console.log("inside second if");
         console.log(paceInSeconds);
     }

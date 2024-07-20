@@ -9,6 +9,7 @@ export function FormatNumber(num: number): string {
     return num.toString();
 }
 
+// Validation functions
 // ValidatePace validates the input parameters for running pace
 export function ValidatePace(min: number, sec: number): boolean {
     return min >= 0 && sec >= 0 && sec < 60;
@@ -24,6 +25,22 @@ export function ValidateUnit(unit: string): boolean {
     return unit === constants.UNIT_KM || unit === constants.UNIT_MILES;
 }
 
+// ValidateTimeEndpoint validates the input parameters for the /time endpoint
+export function ValidateTimeEndpoint(unit: string, min: number, sec: number, distance: number): boolean {
+    return ValidatePace(min, sec) && distance > 0 && ValidateUnit(unit);
+}
+
+// ValidatePaceEndpoint validates the input parameters for the /pace endpoint
+export function ValidatePaceEndpoint(distanceUnit: string, paceUnit: string, hour: number, min: number, sec: number, distance: number): boolean {
+    return ValidateTime(hour, min, sec) && distance > 0 && ValidateUnit(distanceUnit) && ValidateUnit(paceUnit);
+}
+
+export function ValidateDistanceEndpoint(paceMin: number, paceSec: number, runHour: number, runMin: number, runSec: number, distanceUnit: string, paceUnit: string): boolean {
+    return ValidatePace(paceMin, paceSec) && ValidateTime(runHour, runMin, runSec) && ValidateUnit(distanceUnit) && ValidateUnit(paceUnit);
+}
+
+
+// Running calculations functions
 // PaceKmtoPaceMile converts a pace from minutes per kilometer to minutes per mile
 export function PaceKmToPaceMile(pace: number): number {
 
