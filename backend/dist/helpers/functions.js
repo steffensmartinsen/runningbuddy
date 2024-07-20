@@ -59,11 +59,11 @@ function PaceKmToPaceMile(pace) {
 }
 // PaceMileToPaceKm converts a pace from minutes per mile to minutes per kilometer
 function PaceMileToPaceKm(pace) {
-    // Divide the pace by the conversion factor
-    //const paceKm = pace * constants.MILE_TO_KM_CONVERSION;
-    const paceKm = pace / constants.KM_TO_MILE_CONVERSION;
+    // Multiply the pace by the conversion factor
+    const paceKm = pace * constants.MILE_TO_KM_CONVERSION;
     return paceKm;
 }
+// PaceToSeconds converts a pace to seconds
 function PaceToSeconds(min, sec) {
     return (min * constants.SECONDS_IN_MINUTE) + sec;
 }
@@ -73,6 +73,5 @@ function ExtractMinAndSec(pace) {
     let second = (minute - Math.floor(minute)) * 60;
     minute = Math.floor(minute);
     second = Math.round(second);
-    // TODO Revisit --- even needed?
     return [minute, second];
 }
