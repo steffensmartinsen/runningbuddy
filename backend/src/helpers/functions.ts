@@ -62,3 +62,10 @@ export function ExtractMinAndSec(pace: number): [number, number] {
 
     return [minute, second];
 }
+
+export function AlignUnits(distanceUnit: string, paceUnit: string, distance: number): number {
+    if (distanceUnit === constants.UNIT_MILES && paceUnit === constants.UNIT_KM) {
+        return distance * constants.CONVERSION_MILES_AND_KM;
+    }
+    return distance / constants.CONVERSION_MILES_AND_KM;
+}

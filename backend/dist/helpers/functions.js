@@ -32,6 +32,7 @@ exports.PaceMileToPaceKm = PaceMileToPaceKm;
 exports.PaceToSeconds = PaceToSeconds;
 exports.TimeToMinutes = TimeToMinutes;
 exports.ExtractMinAndSec = ExtractMinAndSec;
+exports.AlignUnits = AlignUnits;
 const constants = __importStar(require("../constants/"));
 // Desc: Helper functions used throughout the application
 // FormatNumber formats a number to have a leading zero if it is less than 10
@@ -57,8 +58,6 @@ function ValidateUnit(unit) {
 function PaceKmToPaceMile(pace) {
     // Multiply the pace by the conversion factor
     let paceMile = pace * constants.CONVERSION_MILES_AND_KM;
-    // TODO REMOVE
-    // let paceMile = pace / constants.MILE_TO_KM_CONVERSION
     return paceMile;
 }
 // PaceMileToPaceKm converts a pace from minutes per mile to minutes per kilometer
@@ -81,4 +80,10 @@ function ExtractMinAndSec(pace) {
     minute = Math.floor(minute);
     second = Math.round(second);
     return [minute, second];
+}
+function AlignUnits(distanceUnit, paceUnit, distance) {
+    if (distanceUnit === constants.UNIT_MILES && paceUnit === constants.UNIT_KM) {
+        return distance * constants.CONVERSION_MILES_AND_KM;
+    }
+    return distance / constants.CONVERSION_MILES_AND_KM;
 }

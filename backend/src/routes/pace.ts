@@ -28,8 +28,9 @@ function CalculatePace(req: Request, res: Response): void {
     // Convert the time to minutes for the pace calculation
     const timeInMinutes = helpers.TimeToMinutes(time.hour, time.min, time.sec);
 
-    if (distanceUnit === constants.UNIT_MILES && paceUnit === constants.UNIT_KM) {
-        distance /= constants.CONVERSION_MILES_AND_KM;
+    // 
+    if (distanceUnit != paceUnit) {
+        distance = helpers.AlignUnits(distanceUnit, paceUnit, distance);
     }
 
     // Calculate the pace in minutes per kilometer

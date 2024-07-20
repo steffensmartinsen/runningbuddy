@@ -119,8 +119,6 @@ function CalculateSpecifiedDistance(req, res) {
 // min: the minutes to calculate the time for
 // seconds: the seconds to calculate the time for
 function CalculateTime(unit, distance, min, sec) {
-    // TODO Add support for combining miles and km for distance and pace
-    // "unit" per now is obsolete
     // Combine the time to work with seconds
     let pace = (min * constants.SECONDS_IN_MINUTE) + sec;
     // Handle the common distances in KM
