@@ -51,26 +51,17 @@ function CalculateDistance(req, res) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
         return;
     }
-    // if (!ValidatePace(paceMin, paceSec) || !ValidateTime(runningHour, runningMin, runningSec) || !ValidateUnit(distanceUnit) || !ValidateUnit(paceUnit)){
-    //     res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
-    //         constants.INVALID_INPUT
-    //     );
-    //     return;
-    // }
     // Calculate running time to seconds
     const runInSeconds = helpers.TimeToSeconds(runningHour, runningMin, runningSec);
     // Calculate pace to seconds
     let paceInSeconds = helpers.PaceToSeconds(paceMin, paceSec);
     console.log(paceInSeconds);
+    // Convert the pace to the same unit as the distance
     if (distanceUnit === constants.UNIT_MILES && paceUnit === constants.UNIT_KM) {
         paceInSeconds = helpers.PaceKmToPaceMile(paceInSeconds);
-        console.log("inside first if");
-        console.log(paceInSeconds);
     }
     if (distanceUnit === constants.UNIT_KM && paceUnit === constants.UNIT_MILES) {
         paceInSeconds = helpers.PaceMileToPaceKm(paceInSeconds);
-        console.log("inside second if");
-        console.log(paceInSeconds);
     }
     // Calculate the distance and multiply it by 60 minutes
     const distance = (runInSeconds / paceInSeconds);

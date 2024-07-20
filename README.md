@@ -117,21 +117,24 @@ The *distance* parameter must be greater than 0, *time.min* and *time.sec* must 
 ```
 
 ## `/distance`
-The `distance` endpoint receives a *time* object and a *pace* object, both containing numbers representing time units. For *time* hour is included, whereas *pace* only contains minutes and seconds. The endpoint calculates the distance ran given the running time and pace, and returns the distance in JSON format (see example response body).
+The `distance` endpoint receives a *distanceUnit*, *paceUnit*, *time* object and a *pace* object, both containing numbers representing time units, as input parameters from the request body. For the *time* object, hour is included, whereas the *pace* object only contains minutes and seconds. The endpoint calculates the distance ran given the running time and pace, and returns the distance in JSON format (see example response body).
 
-All input must be greater than or equal to 0. Running time's *min* must be less than 60, and *sec* for both objects must be less than 60.
+All time and pace values must be greater than or equal to 0. Running time's *min* must be less than 60, and *sec* for both objects must be less than 60.<br>
+Both unit parameters can either be `km` or `miles`.
 
 **Example Request Body:**
 ```
 {
+    "distanceUnit": "km",
+    "paceUnit": "miles",
     "time": {
         "hour": 0,
         "min": 45,
         "sec": 0
     },
     "pace": {
-        "min": 4,
-        "sec": 55
+        "min": 8,
+        "sec": 52
     }
 }
 ```
@@ -142,6 +145,6 @@ All input must be greater than or equal to 0. Running time's *min* must be less 
 **Example Response Body:**
 ```
 {
-    "distance": "9.15"
+    "distance": "8.17"
 }
 ```

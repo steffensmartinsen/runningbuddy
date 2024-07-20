@@ -44,6 +44,7 @@ function CalculateDistance(req: Request, res: Response): void {
     let paceInSeconds = helpers.PaceToSeconds(paceMin, paceSec);
     console.log(paceInSeconds);
 
+    // Convert the pace to the same unit as the distance
     if (distanceUnit === constants.UNIT_MILES && paceUnit === constants.UNIT_KM) {
         paceInSeconds = helpers.PaceKmToPaceMile(paceInSeconds);
     }
