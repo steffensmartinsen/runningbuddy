@@ -15,10 +15,11 @@ export function PaceHandler(req: Request, res: Response): void {
 
 // CalculatePace is the function to calculate the pace given a distance and a time
 function CalculatePace(req: Request, res: Response): void {
-    const { unit, distance, time } = req.body;
+    let distance = req.body.distance;
+    const { distanceUnit, time, paceUnit } = req.body;
 
     // Validation of the input parameters
-    if (distance < 0 || !helpers.ValidateTime(time.hour, time.min, time.sec) || !helpers.ValidateUnit(unit)) {
+    if (distance < 0 || !helpers.ValidateTime(time.hour, time.min, time.sec) || !helpers.ValidateUnit(distanceUnit) || !helpers.ValidateUnit(paceUnit)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
             constants.INVALID_INPUT
         );
@@ -26,6 +27,10 @@ function CalculatePace(req: Request, res: Response): void {
 
     // Convert the time to minutes for the pace calculation
     const timeInMinutes = helpers.TimeToMinutes(time.hour, time.min, time.sec);
+
+    if (distanceUnit === constants.UNIT_MILES && paceUnit === constants.UNIT_KM) {
+        distance /= constants.CONVERSION_MILES_AND_KM;
+    }
 
     // Calculate the pace in minutes per kilometer
     const pace = timeInMinutes / distance;

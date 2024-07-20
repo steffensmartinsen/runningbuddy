@@ -56,13 +56,15 @@ function ValidateUnit(unit) {
 // PaceKmtoPaceMile converts a pace from minutes per kilometer to minutes per mile
 function PaceKmToPaceMile(pace) {
     // Multiply the pace by the conversion factor
-    let paceMile = pace * constants.KM_TO_MILE_CONVERSION;
+    let paceMile = pace * constants.CONVERSION_MILES_AND_KM;
+    // TODO REMOVE
+    // let paceMile = pace / constants.MILE_TO_KM_CONVERSION
     return paceMile;
 }
 // PaceMileToPaceKm converts a pace from minutes per mile to minutes per kilometer
 function PaceMileToPaceKm(pace) {
     // Multiply the pace by the conversion factor
-    const paceKm = pace * constants.MILE_TO_KM_CONVERSION;
+    const paceKm = pace * constants.CONVERSION_MILES_AND_KM;
     return paceKm;
 }
 // PaceToSeconds converts a pace to seconds

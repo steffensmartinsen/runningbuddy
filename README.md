@@ -16,7 +16,7 @@ The service serves the following endpoints:
 
 ## `/times`
 
-The `times` endpoint recieves a *unit*, *min* and *sec* input parameter from the request body, and calculates the times for the most popular distances: 5K, 10K, Half-Marathon, and Marathon. These times are returned in JSON format for these distances (see example response body). Units can either be `miles` or `km`.
+The `times` endpoint recieves a *unit*, *min* and *sec* input parameter from the request body, and calculates the times for the most popular distances: 5K, 10K, Half-Marathon, and Marathon. These times are returned in JSON format for these distances (see example response body). *Unit* can either be `miles` or `km`.
 
 The *sec* input parameter must be less than 60, and both input parameters must be greater than or equal to 0.
 

@@ -28,7 +28,10 @@ export function ValidateUnit(unit: string): boolean {
 export function PaceKmToPaceMile(pace: number): number {
 
     // Multiply the pace by the conversion factor
-    let paceMile = pace * constants.KM_TO_MILE_CONVERSION;
+    let paceMile = pace * constants.CONVERSION_MILES_AND_KM
+
+    // TODO REMOVE
+    // let paceMile = pace / constants.MILE_TO_KM_CONVERSION
 
     return paceMile;
 
@@ -38,7 +41,7 @@ export function PaceKmToPaceMile(pace: number): number {
 export function PaceMileToPaceKm(pace: number): number {
 
     // Multiply the pace by the conversion factor
-    const paceKm = pace * constants.MILE_TO_KM_CONVERSION;
+    const paceKm = pace * constants.CONVERSION_MILES_AND_KM;
 
     return paceKm;
 }
