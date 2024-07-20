@@ -30,6 +30,7 @@ exports.ValidateUnit = ValidateUnit;
 exports.PaceKmToPaceMile = PaceKmToPaceMile;
 exports.PaceMileToPaceKm = PaceMileToPaceKm;
 exports.PaceToSeconds = PaceToSeconds;
+exports.TimeToMinutes = TimeToMinutes;
 exports.ExtractMinAndSec = ExtractMinAndSec;
 const constants = __importStar(require("../constants/"));
 // Desc: Helper functions used throughout the application
@@ -48,6 +49,7 @@ function ValidatePace(min, sec) {
 function ValidateTime(hour, min, sec) {
     return hour >= 0 && min >= 0 && sec >= 0 && min < 60 && sec < 60;
 }
+// ValidateUnit validates the input parameter for unit of measurement
 function ValidateUnit(unit) {
     return unit === constants.UNIT_KM || unit === constants.UNIT_MILES;
 }
@@ -66,6 +68,9 @@ function PaceMileToPaceKm(pace) {
 // PaceToSeconds converts a pace to seconds
 function PaceToSeconds(min, sec) {
     return (min * constants.SECONDS_IN_MINUTE) + sec;
+}
+function TimeToMinutes(hour, min, sec) {
+    return ((hour * constants.MINUTES_IN_HOUR) + min + (sec / constants.SECONDS_IN_MINUTE));
 }
 // extractMinAndSec extracts the minutes and seconds from a pace and returns them as a tuple
 function ExtractMinAndSec(pace) {

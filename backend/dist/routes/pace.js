@@ -25,7 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PaceHandler = PaceHandler;
 const constants = __importStar(require("../constants"));
-const functions_1 = require("../helpers/functions");
+const helpers = __importStar(require("../helpers/functions"));
 // PaceHandler is the handler function for the /pace endpoint. It only accepts POST requests.
 function PaceHandler(req, res) {
     if (req.method === constants.HTTP_METHOD_POST) {
@@ -39,16 +39,18 @@ function PaceHandler(req, res) {
 function CalculatePace(req, res) {
     const { unit, distance, time } = req.body;
     // Validation of the input parameters
-    if (distance < 0 || time < 0 || !(0, functions_1.ValidateUnit)(unit)) {
+    if (distance < 0 || !helpers.ValidateTime(time.hour, time.min, time.sec) || !helpers.ValidateUnit(unit)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
     }
+    // Convert the time to minutes for the pace calculation
+    const timeInMinutes = helpers.TimeToMinutes(time.hour, time.min, time.sec);
     // Calculate the pace in minutes per kilometer
-    const pace = time / distance;
+    const pace = timeInMinutes / distance;
     // Seperate the fraction from the integer
-    const minutes = Math.floor(pace);
-    const seconds = Math.round((pace - minutes) * 60);
+    const min = Math.floor(pace);
+    const sec = Math.round((pace - min) * 60);
     res.json({
-        "minutes": (0, functions_1.FormatNumber)(minutes),
-        "seconds": (0, functions_1.FormatNumber)(seconds)
+        "minutes": helpers.FormatNumber(min),
+        "seconds": helpers.FormatNumber(sec)
     });
 }

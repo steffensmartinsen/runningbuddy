@@ -19,6 +19,7 @@ export function ValidateTime(hour: number, min: number, sec: number): boolean {
     return hour >= 0 && min >= 0 && sec >= 0 && min < 60 && sec < 60;
 }
 
+// ValidateUnit validates the input parameter for unit of measurement
 export function ValidateUnit(unit: string): boolean {
     return unit === constants.UNIT_KM || unit === constants.UNIT_MILES;
 }
@@ -46,6 +47,11 @@ export function PaceMileToPaceKm(pace: number): number {
 export function PaceToSeconds(min: number, sec: number): number {
     return (min * constants.SECONDS_IN_MINUTE) + sec;
 }
+
+export function TimeToMinutes(hour: number, min: number, sec: number): number {
+    return ((hour * constants.MINUTES_IN_HOUR) + min + (sec / constants.SECONDS_IN_MINUTE));
+}
+
 
 // extractMinAndSec extracts the minutes and seconds from a pace and returns them as a tuple
 export function ExtractMinAndSec(pace: number): [number, number] {
