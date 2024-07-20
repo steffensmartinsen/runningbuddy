@@ -31,6 +31,7 @@ exports.PaceKmToPaceMile = PaceKmToPaceMile;
 exports.PaceMileToPaceKm = PaceMileToPaceKm;
 exports.PaceToSeconds = PaceToSeconds;
 exports.TimeToMinutes = TimeToMinutes;
+exports.TimeToSeconds = TimeToSeconds;
 exports.ExtractMinAndSec = ExtractMinAndSec;
 exports.AlignUnits = AlignUnits;
 const constants = __importStar(require("../constants/"));
@@ -63,15 +64,20 @@ function PaceKmToPaceMile(pace) {
 // PaceMileToPaceKm converts a pace from minutes per mile to minutes per kilometer
 function PaceMileToPaceKm(pace) {
     // Multiply the pace by the conversion factor
-    const paceKm = pace * constants.CONVERSION_MILES_AND_KM;
+    const paceKm = pace / constants.CONVERSION_MILES_AND_KM;
     return paceKm;
 }
 // PaceToSeconds converts a pace to seconds
 function PaceToSeconds(min, sec) {
     return (min * constants.SECONDS_IN_MINUTE) + sec;
 }
+// TimeToMinutes converts a time to minutes
 function TimeToMinutes(hour, min, sec) {
     return ((hour * constants.MINUTES_IN_HOUR) + min + (sec / constants.SECONDS_IN_MINUTE));
+}
+// TimeToSeconds converts a time to seconds
+function TimeToSeconds(hour, min, sec) {
+    return ((hour * constants.MINUTES_IN_HOUR * constants.SECONDS_IN_MINUTE) + (min * constants.SECONDS_IN_MINUTE) + sec);
 }
 // extractMinAndSec extracts the minutes and seconds from a pace and returns them as a tuple
 function ExtractMinAndSec(pace) {
@@ -81,6 +87,7 @@ function ExtractMinAndSec(pace) {
     second = Math.round(second);
     return [minute, second];
 }
+// AlignUnits aligns the units of distance and pace
 function AlignUnits(distanceUnit, paceUnit, distance) {
     if (distanceUnit === constants.UNIT_MILES && paceUnit === constants.UNIT_KM) {
         return distance * constants.CONVERSION_MILES_AND_KM;

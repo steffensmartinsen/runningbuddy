@@ -28,7 +28,7 @@ function CalculatePace(req: Request, res: Response): void {
     // Convert the time to minutes for the pace calculation
     const timeInMinutes = helpers.TimeToMinutes(time.hour, time.min, time.sec);
 
-    // 
+    // Align the units if they are different
     if (distanceUnit != paceUnit) {
         distance = helpers.AlignUnits(distanceUnit, paceUnit, distance);
     }

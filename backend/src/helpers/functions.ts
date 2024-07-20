@@ -38,7 +38,7 @@ export function PaceKmToPaceMile(pace: number): number {
 export function PaceMileToPaceKm(pace: number): number {
 
     // Multiply the pace by the conversion factor
-    const paceKm = pace * constants.CONVERSION_MILES_AND_KM;
+    const paceKm = pace / constants.CONVERSION_MILES_AND_KM;
 
     return paceKm;
 }
@@ -48,10 +48,15 @@ export function PaceToSeconds(min: number, sec: number): number {
     return (min * constants.SECONDS_IN_MINUTE) + sec;
 }
 
+// TimeToMinutes converts a time to minutes
 export function TimeToMinutes(hour: number, min: number, sec: number): number {
     return ((hour * constants.MINUTES_IN_HOUR) + min + (sec / constants.SECONDS_IN_MINUTE));
 }
 
+// TimeToSeconds converts a time to seconds
+export function TimeToSeconds(hour: number, min: number, sec: number): number {
+    return ((hour * constants.MINUTES_IN_HOUR * constants.SECONDS_IN_MINUTE) + (min * constants.SECONDS_IN_MINUTE) + sec);
+}
 
 // extractMinAndSec extracts the minutes and seconds from a pace and returns them as a tuple
 export function ExtractMinAndSec(pace: number): [number, number] {
@@ -63,6 +68,7 @@ export function ExtractMinAndSec(pace: number): [number, number] {
     return [minute, second];
 }
 
+// AlignUnits aligns the units of distance and pace
 export function AlignUnits(distanceUnit: string, paceUnit: string, distance: number): number {
     if (distanceUnit === constants.UNIT_MILES && paceUnit === constants.UNIT_KM) {
         return distance * constants.CONVERSION_MILES_AND_KM;

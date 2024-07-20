@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as constants from '../constants';
-import { ValidatePace, ValidateTime } from '../helpers/functions';
+import { ValidatePace, ValidateTime, ValidateUnit, TimeToSeconds, PaceToSeconds, PaceMileToPaceKm, PaceKmToPaceMile } from '../helpers/functions';
 
 // DistanceHandler is the function that servers the /pace-calculator/distance endpoint. It only accepts POST requests.
 export function DistanceHandler(req: Request, res: Response): void {
@@ -16,6 +16,9 @@ export function DistanceHandler(req: Request, res: Response): void {
 // CalculateDistance is the function that calculates the distance based on the running time and pace.
 function CalculateDistance(req: Request, res: Response): void {
 
+    // Extract the distance unit and the pace unit
+    const { distanceUnit, paceUnit } = req.body;
+
     // Extract the running time input paramteres
     const runningHour = req.body.time.hour;
     const runningMin = req.body.time.min;
@@ -26,7 +29,7 @@ function CalculateDistance(req: Request, res: Response): void {
     const paceSec = req.body.pace.sec;
 
     // Validate the input parameters
-    if (!ValidatePace(paceMin, paceSec) || !ValidateTime(runningHour, runningMin, runningSec)) {
+    if (!ValidatePace(paceMin, paceSec) || !ValidateTime(runningHour, runningMin, runningSec) || !ValidateUnit(distanceUnit) || !ValidateUnit(paceUnit)){
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
             constants.INVALID_INPUT
         );
@@ -34,12 +37,22 @@ function CalculateDistance(req: Request, res: Response): void {
     }
 
     // Calculate running time to seconds
-    const runInSeconds = ((runningHour * constants.MINUTES_IN_HOUR) * constants.SECONDS_IN_MINUTE) 
-    + (runningMin * constants.SECONDS_IN_MINUTE) 
-    + runningSec;
+    const runInSeconds = TimeToSeconds(runningHour, runningMin, runningSec);
     
     // Calculate pace to seconds
-    const paceInSeconds = (paceMin * constants.MINUTES_IN_HOUR) + paceSec
+    let paceInSeconds = PaceToSeconds(paceMin, paceSec);
+    console.log(paceInSeconds);
+
+    if (distanceUnit === constants.UNIT_MILES && paceUnit === constants.UNIT_KM) {
+        paceInSeconds = PaceKmToPaceMile(paceInSeconds);
+        console.log("inside first if");
+        console.log(paceInSeconds);
+    }
+    if (distanceUnit === constants.UNIT_KM && paceUnit === constants.UNIT_MILES) {
+        paceInSeconds = PaceMileToPaceKm(paceInSeconds);
+        console.log("inside second if");
+        console.log(paceInSeconds);
+    }
 
     // Calculate the distance and multiply it by 60 minutes
     const distance = (runInSeconds/paceInSeconds);
