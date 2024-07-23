@@ -35,6 +35,7 @@ export function ValidatePaceEndpoint(distanceUnit: string, paceUnit: string, hou
     return ValidateTime(hour, min, sec) && distance > 0 && ValidateUnit(distanceUnit) && ValidateUnit(paceUnit);
 }
 
+// ValidateDistanceEndpoint validates the input parameters for the /distance endpoint
 export function ValidateDistanceEndpoint(paceMin: number, paceSec: number, runHour: number, runMin: number, runSec: number, distanceUnit: string, paceUnit: string): boolean {
     return ValidatePace(paceMin, paceSec) && ValidateTime(runHour, runMin, runSec) && ValidateUnit(distanceUnit) && ValidateUnit(paceUnit);
 }
