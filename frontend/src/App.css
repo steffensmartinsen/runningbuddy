@@ -35,9 +35,13 @@
   align-items: center;
   margin-top: 40px;
   height: 50px;
-  border-top: 3px solid #fd0707;
+  /* border-top: 3px solid #fd0707;
   border-left: 3px solid #fd0707;
-  border-right: 3px solid #fd0707;
+  border-right: 3px solid #fd0707; */
+  box-shadow: 
+    0 -3px 0 0 #fd0707, /* Top border */
+    -3px 0 0 0 #fd0707, /* Left border */
+    3px 0 0 0 #fd0707; /* Right border */
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
 }
@@ -62,10 +66,33 @@
   width: 100%;
 }
 
-.centerContainer {
-  align-self: center;
+/* Hover effect for leftContainer */
+.leftContainer:hover {
+  background-color: rgb(194, 191, 191);
+  border-top-left-radius: 15px; /* Apply radius to the top-left corner */
+  cursor: pointer;
 }
 
+/* Hover effect for centerContainer */
+.centerContainer:hover {
+  background-color: rgb(194, 191, 191);
+  cursor: pointer;
+}
+
+/* Hover effect for rightContainer */
+.rightContainer:hover {
+  background-color: rgb(194, 191, 191);
+  border-top-right-radius: 15px; /* Apply radius to the top-right corner */
+  cursor: pointer;
+}
+
+.rightContainer {
+  z-index: 0;
+}
+
+.centerContainer {
+  z-index: 3;
+}
 
 @media (max-width: 500px ) {
   
@@ -81,6 +108,18 @@
   .calculationContainer {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
+  }
+
+  .rightContainer:hover {
+    background-color: rgb(194, 191, 191);
+    border-top-right-radius: 0px;
+    cursor: pointer;
+  }
+
+  .leftContainer:hover {
+    background-color: rgb(194, 191, 191);
+    border-top-left-radius: 0px;
+    cursor: pointer;
   }
 
 }
