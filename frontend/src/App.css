@@ -16,35 +16,50 @@
   height: 110%;
 }
 
-.calculationContainer {
+/* .calculationContainer {
   display: flex;
   width: 100%;
   justify-content: space-around;
   margin-top: 40px;
   height: 50px;
   border-top: 3px solid #fd0707;
+  border-left: 3px solid #fd0707;
+  border-right: 3px solid #fd0707;
+} */
+
+.calculationContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  justify-items: center;
+  align-items: center;
+  margin-top: 40px;
+  height: 50px;
+  border-top: 3px solid #fd0707;
+  border-left: 3px solid #fd0707;
+  border-right: 3px solid #fd0707;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 .centerContainer {
   position: relative; /* Needed for absolute positioning of pseudo-elements */
-}
-
-.leftContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  border-right: 3px solid #fd0707;
-  padding-right: 50px;
-}
-
-.rightContainer {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   border-left: 3px solid #fd0707;
-  padding-left: 50px;
+  border-right: 3px solid #fd0707;
+}
+
+.leftContainer, .rightContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .centerContainer {
@@ -62,4 +77,10 @@
     margin-top: 20px;
     width: 100%;
   }
+
+  .calculationContainer {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+
 }
