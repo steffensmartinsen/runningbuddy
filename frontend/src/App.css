@@ -16,6 +16,15 @@
   height: 110%;
 }
 
+.title {
+  color: rgb(187, 13, 13);
+}
+
+.slogan {
+  color: rgb(216, 49, 49);
+  margin-top: 20px;
+}
+
 /* .calculationContainer {
   display: flex;
   width: 100%;

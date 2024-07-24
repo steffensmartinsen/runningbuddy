@@ -5,8 +5,8 @@ function App() {
   return (
     <div className='mainContainer'>
       <div className='mainContent'>
-        <h1>Running Buddy</h1>
-        <p>Calculations for your running needs</p>
+        <h1 className="title">Running Buddy</h1>
+        <p className="slogan">Calculations for your running needs</p>
         <div className="calculationContainer">
           <div className="leftContainer">
             Distance
