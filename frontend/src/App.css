@@ -95,12 +95,37 @@
   cursor: pointer;
 }
 
+.leftContainer.selected, .centerContainer.selected, .rightContainer.selected {
+  background-color: gainsboro;
+}
+
+.leftContainer.selected {
+  border-top-left-radius: 15px;
+}
+
+.rightContainer.selected {
+  border-top-right-radius: 15px;
+}
+
 .rightContainer {
   z-index: 0;
 }
 
 .centerContainer {
   z-index: 3;
+}
+
+.tabHeader {
+  font-size: large;
+}
+
+.calculationContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
+  background-color: gainsboro;
 }
 
 @media (max-width: 500px ) {
@@ -117,6 +142,7 @@
   .calculationContainer {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
+    margin-bottom: 8px;
   }
 
   .rightContainer:hover {
@@ -131,4 +157,12 @@
     cursor: pointer;
   }
 
+  .calculationContent {
+    padding: 30px;
+  }
+
+  .leftContainer.selected, .centerContainer.selected, .rightContainer.selected {
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
+  }
 }
