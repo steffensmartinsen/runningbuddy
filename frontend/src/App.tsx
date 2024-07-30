@@ -10,24 +10,33 @@ function App() {
   const [timeSelected, setTimeSelected] = useState(false);
 
   const handleDistanceSelected = () => {
-    setDistanceSelected(true);
-    setPaceSelected(false);
-    setTimeSelected(false);
-    console.log("Distance selected");
+    if (distanceSelected) {
+      setDistanceSelected(false);
+      console.log("Distance de-selected");
+    } else {
+      setDistanceSelected(true);
+      console.log("Distance selected");
+    }
   }
 
   const handlePaceSelected = () => {
-    setDistanceSelected(false);
-    setPaceSelected(true);
-    setTimeSelected(false);
-    console.log("Pace selected");
+    if (paceSelected) {
+      setPaceSelected(false);
+      console.log("Pace de-selected");
+    } else {
+      setPaceSelected(true);
+      console.log("Pace selected");
+    }
   }
 
   const handleTimeSelected = () => {
-    setDistanceSelected(false);
-    setPaceSelected(false);
-    setTimeSelected(true);
-    console.log("Time selected");
+    if (timeSelected) {
+      setTimeSelected(false);
+      console.log("Time de-selected");
+    } else {
+      setTimeSelected(true);
+      console.log("Time selected");
+    }
   }
 
   return (
@@ -52,9 +61,11 @@ function App() {
             <p className="tabHeader">Time</p>
           </div>
         </div>
+        {(distanceSelected || paceSelected || timeSelected) && (
           <div className="calculationContent">
             {distanceSelected && <DistanceHandler />}
           </div>
+        )}
       </div>
     </div>
   );
