@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './App.css';
 import DistanceHandler from './components/distance';
+import PaceHandler from './components/pace';
+import TimeHandler from './components/time';
 import { distanceClassname, paceClassname, timeClassname } from './utils/helpers';
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
       console.log("Distance de-selected");
     } else {
       setDistanceSelected(true);
+      setPaceSelected(false);
+      setTimeSelected(false);
       console.log("Distance selected");
     }
   }
@@ -25,6 +29,8 @@ function App() {
       console.log("Pace de-selected");
     } else {
       setPaceSelected(true);
+      setDistanceSelected(false);
+      setTimeSelected(false);
       console.log("Pace selected");
     }
   }
@@ -35,6 +41,8 @@ function App() {
       console.log("Time de-selected");
     } else {
       setTimeSelected(true);
+      setDistanceSelected(false);
+      setPaceSelected(false);
       console.log("Time selected");
     }
   }
@@ -64,6 +72,8 @@ function App() {
         {(distanceSelected || paceSelected || timeSelected) && (
           <div className="calculationContent">
             {distanceSelected && <DistanceHandler />}
+            {paceSelected && <PaceHandler />}
+            {timeSelected && <TimeHandler />}
           </div>
         )}
       </div>
