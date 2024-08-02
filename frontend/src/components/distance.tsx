@@ -5,8 +5,9 @@ import { Input } from '@chakra-ui/react';
 const DistanceHandler = () => {
     return (
         <>
-            <h1>DistanceHandler</h1>
-            <p>DistanceHandler is the function that servers the /pace-calculator/distance endpoint. It only accepts POST requests.</p>
+            <h1 className="tabH1">Calculate Distance</h1>
+            <p className="explanation">Provide the time of your run and the 
+                pace for the run in total to calculate the distance of the run.</p>
             <p className="subTitle">Time:</p>
             <div className="timingsContainer">
                 <InputField placeholder='Hour' />

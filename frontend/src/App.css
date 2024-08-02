@@ -145,6 +145,17 @@
   background-color: white;
 }
 
+.tabH1 {
+  font-size: large;
+  font-weight: bold;
+  color: rgb(187, 13, 13);
+  padding: 8px 0px;
+}
+
+.explanation {
+  margin: 0px 30%;
+}
+
 
 @media (max-width: 500px ) {
   
@@ -184,5 +195,9 @@
 
   .timeContainer {
     justify-content: space-between;
+  }
+
+  .explanation {
+    margin: 0px 25px;
   }
 }
