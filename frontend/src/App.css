@@ -20,6 +20,12 @@
   color: rgb(187, 13, 13);
 }
 
+.subTitle {
+  color: rgb(187, 13, 13);
+  margin-top: 20px;
+  align-self: start;
+}
+
 .slogan {
   color: rgb(216, 49, 49);
   margin-top: 20px;
@@ -129,11 +135,10 @@
   background-color: gainsboro;
 }
 
-.timeContainer {
+.timingsContainer {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  margin-top: 20px;
 }
 
 .inputField {

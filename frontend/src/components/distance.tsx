@@ -7,8 +7,14 @@ const DistanceHandler = () => {
         <>
             <h1>DistanceHandler</h1>
             <p>DistanceHandler is the function that servers the /pace-calculator/distance endpoint. It only accepts POST requests.</p>
-            <div className="timeContainer">
+            <p className="subTitle">Time:</p>
+            <div className="timingsContainer">
                 <InputField placeholder='Hour' />
+                <InputField placeholder='Min' />
+                <InputField placeholder='Sec' />
+            </div>
+            <p className="subTitle">Pace:</p>
+            <div className="timingsContainer">
                 <InputField placeholder='Min' />
                 <InputField placeholder='Sec' />
             </div>
