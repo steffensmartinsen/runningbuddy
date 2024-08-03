@@ -31,16 +31,6 @@
   margin-top: 20px;
 }
 
-/* .calculationContainer {
-  width: 100%;
-  justify-content: space-around;
-  margin-top: 40px;
-  height: 50px;
-  border-top: 3px solid #fd0707;
-  border-left: 3px solid #fd0707;
-  border-right: 3px solid #fd0707;
-} */
-
 .calculationContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -49,9 +39,6 @@
   align-items: center;
   margin-top: 40px;
   height: 3em;
-  /* border-top: 3px solid #fd0707;
-  border-left: 3px solid #fd0707;
-  border-right: 3px solid #fd0707; */
   box-shadow: 
     0 -3px 0 0 #fd0707, /* Top border */
     -3px 0 0 0 #fd0707, /* Left border */
@@ -154,6 +141,12 @@
 
 .explanation {
   margin: 0px 30%;
+}
+
+.radioContainer {
+  display: flex;
+  align-items: start;
+  width: 100%;
 }
 
 
