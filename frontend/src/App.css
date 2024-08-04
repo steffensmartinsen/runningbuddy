@@ -152,6 +152,15 @@
   width: 100%;
 }
 
+.metricContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.metric {
+  padding: 0px 60px;
+}
 
 @media (max-width: 500px ) {
   
@@ -195,5 +204,9 @@
 
   .explanation {
     margin: 0px 25px;
+  }
+
+  .metric {
+    padding: 0px 20px;
   }
 }

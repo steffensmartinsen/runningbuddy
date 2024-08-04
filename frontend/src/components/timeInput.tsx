@@ -4,15 +4,15 @@ interface TimeInputProps {
     hour: string;
     min: string;
     sec: string;
-    hourChange: (value: string) => void;
+    setHour: (value: string) => void;
     minChange: (value: string) => void;
     secChange: (value: string) => void;
 }
 
-function TimeInput({ hour, min, sec, hourChange, minChange, secChange }: TimeInputProps) {
-    const handleHourChange = (e: string) => {
-        hourChange(e);
-    };
+function TimeInput({ hour, min, sec, setHour, minChange, secChange }: TimeInputProps) {
+    // const handleHourChange = (e: string) => {
+    //     hourChange(e);
+    // };
 
     const handleMinChange = (e: string) => {
         minChange(e);
@@ -27,7 +27,7 @@ function TimeInput({ hour, min, sec, hourChange, minChange, secChange }: TimeInp
             <InputField
             placeholder='Hour'
             value={hour}
-            onChange={handleHourChange}
+            onChange={setHour}
             />
             <InputField
             placeholder='Min'

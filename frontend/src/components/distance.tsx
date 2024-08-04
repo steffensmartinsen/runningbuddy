@@ -2,9 +2,11 @@ import React from 'react';
 import { RadioGroup, Radio, Stack } from '@chakra-ui/react';
 import TimeInput from './timeInput';
 import PaceInput from './paceInput';
+import MetricButtons from './metricButtons';
 
 const DistanceHandler = () => {
-    const [metric, setMetric] = React.useState('km');
+    const [paceMetric, setPaceMetric] = React.useState('km');
+    const [distanceMetric, setDistanceMetric] = React.useState('km');
     const [timeHour, setTimeHour] = React.useState('');
     const [timeMin, setTimeMin] = React.useState('');
     const [timeSec, setTimeSec] = React.useState('');
@@ -29,29 +31,35 @@ const DistanceHandler = () => {
         setPaceSec(e);
     }
 
+    console.log(timeHour);
+
     return (
         <>
             <h1 className="tabH1">Calculate Distance</h1>
             <p className="explanation">Provide the time of your run and the 
                 pace for the run in total to calculate the distance of the run.</p>
-            <p className="subTitle">Metric:</p>
-            <div className="radioContainer">
-                <RadioGroup onChange={setMetric} value={metric}>
-                    <Stack direction='column'>
-                        <Radio value='km' className="inputField">Km</Radio>
-                        <Radio value='miles' className="inputField">Miles</Radio>
-                    </Stack>
-                </RadioGroup>
+            
+            <div className="metricContainer">
+                <div className="metric">
+                    <p className="subTitle">Pace metric:</p>
+                    <MetricButtons metric={paceMetric} setMetric={setPaceMetric} />
+                </div>
+                <div className="metric">
+                    <p className="subTitle">Distance metric:</p>
+                    <MetricButtons metric={distanceMetric} setMetric={setDistanceMetric} />
+                </div>
             </div>
+
             <p className="subTitle">Time:</p>
             <TimeInput
             hour={timeHour}
             min={timeMin}
             sec={timeSec}
-            hourChange={handleTimeHourChange}
+            setHour={setTimeHour}
             minChange={handleTimeMinChange}
             secChange={handleTimeSecChange}
             />
+            
             <p className="subTitle">Pace:</p>
             <PaceInput
             paceMin={paceMin}
@@ -59,6 +67,7 @@ const DistanceHandler = () => {
             minChange={handlePaceMinChange}
             secChange={handlePaceSecChange}
             />
+
         </>
     )
 }
