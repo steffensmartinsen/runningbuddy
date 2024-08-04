@@ -191,7 +191,7 @@
   }
 
   .calculationContent {
-    padding: 30px;
+    padding: 60px;
   }
 
   .leftContainer.selected, .centerContainer.selected, .rightContainer.selected {
@@ -210,3 +210,5 @@
     padding: 0px 20px;
   }
 }
+
+/* TODO Add tablet size support */

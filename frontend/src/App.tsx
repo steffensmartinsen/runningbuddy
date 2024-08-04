@@ -14,36 +14,30 @@ function App() {
   const handleDistanceSelected = () => {
     if (distanceSelected) {
       setDistanceSelected(false);
-      console.log("Distance de-selected");
     } else {
       setDistanceSelected(true);
       setPaceSelected(false);
       setTimeSelected(false);
-      console.log("Distance selected");
     }
   }
 
   const handlePaceSelected = () => {
     if (paceSelected) {
       setPaceSelected(false);
-      console.log("Pace de-selected");
     } else {
       setPaceSelected(true);
       setDistanceSelected(false);
       setTimeSelected(false);
-      console.log("Pace selected");
     }
   }
 
   const handleTimeSelected = () => {
     if (timeSelected) {
       setTimeSelected(false);
-      console.log("Time de-selected");
     } else {
       setTimeSelected(true);
       setDistanceSelected(false);
       setPaceSelected(false);
-      console.log("Time selected");
     }
   }
 

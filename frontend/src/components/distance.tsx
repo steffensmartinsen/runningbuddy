@@ -13,8 +13,6 @@ const DistanceHandler = () => {
     const [paceMin, setPaceMin] = React.useState('');
     const [paceSec, setPaceSec] = React.useState('');
 
-    console.log(paceMetric, distanceMetric, timeHour, timeMin, timeSec, paceMin, paceSec);
-
     return (
         <>
             <h1 className="tabH1">Calculate Distance</h1>
