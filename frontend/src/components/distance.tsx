@@ -4,7 +4,19 @@ import { Input, RadioGroup, Radio, Stack } from '@chakra-ui/react';
 
 const DistanceHandler = () => {
     const [metric, setMetric] = React.useState('km');
-    
+    const [hour, setTimeHour] = React.useState('');
+    const [min, setTimeMin] = React.useState('');
+    const [sec, setTimeSec] = React.useState('');
+
+    const handleTimeHourChange = (e: string) => {
+        setTimeHour(e);
+    }
+    const handleTimeMinChange = (e: string) => {
+        setTimeMin(e);
+    }
+    const handleTimeSecChange = (e: string) => {
+        setTimeSec(e);
+    }
 
     return (
         <>
@@ -22,15 +34,27 @@ const DistanceHandler = () => {
             </div>
             <p className="subTitle">Time:</p>
             <div className="timingsContainer">
-                <InputField placeholder='Hour' />
-                <InputField placeholder='Min' />
-                <InputField placeholder='Sec' />
+                <InputField 
+                placeholder='Hour' 
+                value={hour}
+                onChange={handleTimeHourChange}
+                />
+                <InputField 
+                placeholder='Min' 
+                value={min}
+                onChange={handleTimeMinChange}
+                />
+                <InputField 
+                placeholder='Sec' 
+                value={sec}
+                onChange={handleTimeSecChange}
+                />
             </div>
-            <p className="subTitle">Pace:</p>
+            {/* <p className="subTitle">Pace:</p>
             <div className="timingsContainer">
                 <InputField placeholder='Min' />
                 <InputField placeholder='Sec' />
-            </div>
+            </div> */}
         </>
     )
 }
