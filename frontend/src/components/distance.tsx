@@ -13,25 +13,7 @@ const DistanceHandler = () => {
     const [paceMin, setPaceMin] = React.useState('');
     const [paceSec, setPaceSec] = React.useState('');
 
-
-    const handleTimeHourChange = (e: string) => {
-        setTimeHour(e);
-    }
-    const handleTimeMinChange = (e: string) => {
-        setTimeMin(e);
-    }
-    const handleTimeSecChange = (e: string) => {
-        setTimeSec(e);
-    }
-
-    const handlePaceMinChange = (e: string) => {
-        setPaceMin(e);
-    }
-    const handlePaceSecChange = (e: string) => {
-        setPaceSec(e);
-    }
-
-    console.log(timeHour);
+    console.log(paceMetric, distanceMetric, timeHour, timeMin, timeSec, paceMin, paceSec);
 
     return (
         <>
@@ -56,16 +38,16 @@ const DistanceHandler = () => {
             min={timeMin}
             sec={timeSec}
             setHour={setTimeHour}
-            minChange={handleTimeMinChange}
-            secChange={handleTimeSecChange}
+            setMin={setTimeMin}
+            setSec={setTimeSec}
             />
             
             <p className="subTitle">Pace:</p>
             <PaceInput
             paceMin={paceMin}
             paceSec={paceSec}
-            minChange={handlePaceMinChange}
-            secChange={handlePaceSecChange}
+            setMin={setPaceMin}
+            setSec={setPaceSec}
             />
 
         </>

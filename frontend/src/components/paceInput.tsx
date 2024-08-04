@@ -3,30 +3,23 @@ import InputField from "./inputField";
 interface PaceInputProps {
     paceMin: string;
     paceSec: string;
-    minChange: (value: string) => void;
-    secChange: (value: string) => void;
+    setMin: (value: string) => void;
+    setSec: (value: string) => void;
 }
 
-function PaceInput({ paceMin, paceSec, minChange, secChange }: PaceInputProps) {
-    const handleMinChange = (e: string) => {
-        minChange(e);
-    };
-
-    const handleSecChange = (e: string) => {
-        secChange(e);
-    };
+function PaceInput({ paceMin, paceSec, setMin, setSec }: PaceInputProps) {
 
     return (
         <div className="timingsContainer">
             <InputField
             placeholder='Min'
             value={paceMin}
-            onChange={handleMinChange}
+            onChange={setMin}
             />
             <InputField
             placeholder='Sec'
             value={paceSec}
-            onChange={handleSecChange}
+            onChange={setSec}
             />
         </div>
     );
