@@ -1,13 +1,16 @@
 import React from 'react';
-import InputField from './inputField';
-import { Input, RadioGroup, Radio, Stack } from '@chakra-ui/react';
+import { RadioGroup, Radio, Stack } from '@chakra-ui/react';
 import TimeInput from './timeInput';
+import PaceInput from './paceInput';
 
 const DistanceHandler = () => {
     const [metric, setMetric] = React.useState('km');
-    const [hour, setTimeHour] = React.useState('');
-    const [min, setTimeMin] = React.useState('');
-    const [sec, setTimeSec] = React.useState('');
+    const [timeHour, setTimeHour] = React.useState('');
+    const [timeMin, setTimeMin] = React.useState('');
+    const [timeSec, setTimeSec] = React.useState('');
+    const [paceMin, setPaceMin] = React.useState('');
+    const [paceSec, setPaceSec] = React.useState('');
+
 
     const handleTimeHourChange = (e: string) => {
         setTimeHour(e);
@@ -19,7 +22,12 @@ const DistanceHandler = () => {
         setTimeSec(e);
     }
 
-    console.log(metric, hour, min, sec);
+    const handlePaceMinChange = (e: string) => {
+        setPaceMin(e);
+    }
+    const handlePaceSecChange = (e: string) => {
+        setPaceSec(e);
+    }
 
     return (
         <>
@@ -37,18 +45,20 @@ const DistanceHandler = () => {
             </div>
             <p className="subTitle">Time:</p>
             <TimeInput
-            hour={hour}
-            min={min}
-            sec={sec}
+            hour={timeHour}
+            min={timeMin}
+            sec={timeSec}
             hourChange={handleTimeHourChange}
             minChange={handleTimeMinChange}
             secChange={handleTimeSecChange}
             />
-            {/* <p className="subTitle">Pace:</p>
-            <div className="timingsContainer">
-                <InputField placeholder='Min' />
-                <InputField placeholder='Sec' />
-            </div> */}
+            <p className="subTitle">Pace:</p>
+            <PaceInput
+            paceMin={paceMin}
+            paceSec={paceSec}
+            minChange={handlePaceMinChange}
+            secChange={handlePaceSecChange}
+            />
         </>
     )
 }
