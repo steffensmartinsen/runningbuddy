@@ -67,6 +67,7 @@ function ValidateTimeEndpoint(unit, min, sec, distance) {
 function ValidatePaceEndpoint(distanceUnit, paceUnit, hour, min, sec, distance) {
     return ValidateTime(hour, min, sec) && distance > 0 && ValidateUnit(distanceUnit) && ValidateUnit(paceUnit);
 }
+// ValidateDistanceEndpoint validates the input parameters for the /distance endpoint
 function ValidateDistanceEndpoint(paceMin, paceSec, runHour, runMin, runSec, distanceUnit, paceUnit) {
     return ValidatePace(paceMin, paceSec) && ValidateTime(runHour, runMin, runSec) && ValidateUnit(distanceUnit) && ValidateUnit(paceUnit);
 }

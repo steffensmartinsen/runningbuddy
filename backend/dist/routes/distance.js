@@ -28,8 +28,14 @@ const constants = __importStar(require("../constants"));
 const helpers = __importStar(require("../helpers/functions"));
 // DistanceHandler is the function that servers the /pace-calculator/distance endpoint. It only accepts POST requests.
 function DistanceHandler(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     if (req.method === constants.HTTP_METHOD_POST) {
         CalculateDistance(req, res);
+    }
+    else if (req.method === constants.HTTP_METHOD_OPTIONS) {
+        res.status(constants.HTTP_STATUS_NO_CONTENT).send();
     }
     else {
         res.status(constants.HTTP_STATUS_METHOD_NOT_ALLOWED).send(constants.TEXT_METHOD_NOT_ALLOWED);

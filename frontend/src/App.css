@@ -142,10 +142,6 @@
   padding: 8px 0px;
 }
 
-.explanation {
-  margin: 0px 30%;
-}
-
 .radioContainer {
   display: flex;
   align-items: start;
@@ -160,6 +156,21 @@
 
 .metric {
   padding: 0px 60px;
+}
+
+.calculateButton {
+  margin-top: 20px;
+}
+
+.resultContainer {
+  margin-top: 20px;
+  display: flex;
+}
+
+.distanceText {
+  padding-right: 20px;
+  color: rgb(216, 49, 49);
+  font-weight: bold;
 }
 
 @media (max-width: 500px ) {

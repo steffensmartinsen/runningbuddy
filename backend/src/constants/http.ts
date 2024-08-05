@@ -6,9 +6,13 @@ export const HTTP_METHOD_GET = 'GET';
 
 export const HTTP_METHOD_POST = 'POST';
 
+export const HTTP_METHOD_OPTIONS = 'OPTIONS';
+
 
 // SUCCESS
 export const HTTP_STATUS_OK = 200;
+
+export const HTTP_STATUS_NO_CONTENT = 204;
 
 
 // ERROR
