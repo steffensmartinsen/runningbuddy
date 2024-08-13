@@ -5,12 +5,14 @@ import DistanceInput from './distanceInput';
 import PaceInput from './paceInput';
 import * as constants from '../constants';
 import { error } from 'console';
+import TimeInput from './timeInput';
 
 const PaceHandler = () => {
     const [distanceUnit, setDistanceUnit] = React.useState('km');
     const [distance, setDistance] = React.useState('');
-    const [paceMin, setPaceMin] = React.useState('');
-    const [paceSec, setPaceSec] = React.useState('');
+    const [timeHour, setTimeHour] = React.useState('');
+    const [timeMin, setTimeMin] = React.useState('');
+    const [timeSec, setTimeSec] = React.useState('');
     const [answerUnit, setAnswerUnit] = React.useState('km');
     const [answerMin, setAnswerMin] = React.useState('');
     const [answerSec, setAnswerSec] = React.useState('');
@@ -20,12 +22,13 @@ const PaceHandler = () => {
 
         const data = {
             distanceUnit: distanceUnit,
-            answerUnit: answerUnit,
             distance: Number(distance),
-            pace: {
-                min: Number(paceMin),
-                sec: Number(paceSec)
-            }
+            time: {
+                hour: Number(timeHour),
+                min: Number(timeMin),
+                sec: Number(timeSec)
+            },
+            paceUnit: answerUnit,
         }
 
         fetch(constants.ENDPOINTS.PACE, {
@@ -62,23 +65,24 @@ const PaceHandler = () => {
             <div className="metricContainer">
                 <div className="metric">
                     <p className="subTitle">Answer unit:</p>
-                    <MetricButtons metric={distanceUnit} setMetric={setDistanceUnit} />
+                    <MetricButtons metric={answerUnit} setMetric={setAnswerUnit} />
                 </div>
             </div>
 
-            <DistanceInput 
+            <DistanceInput
+            unit={distanceUnit} 
             distance={distance} 
             setDistance={setDistance} 
-            unit={distanceUnit} 
+            setUnit={setDistanceUnit} 
             />
 
-            <PaceInput
-            paceMin={paceMin}
-            paceSec={paceSec}
-            metric={answerUnit}
-            setMin={setPaceMin}
-            setSec={setPaceSec}
-            setMetric={setAnswerUnit}
+            <TimeInput
+            hour={timeHour}
+            min={timeMin}
+            sec={timeSec}
+            setHour={setTimeHour}
+            setMin={setTimeMin}
+            setSec={setTimeSec}
             />
 
             <Button colorScheme='red' className="calculateButton" size='md' onClick={handleClick}>
@@ -87,7 +91,7 @@ const PaceHandler = () => {
 
             {response && (
                 <div className="resultContainer">
-                    <p className="resultText">Pace</p>
+                    <p className="resultText">Pace:</p>
                     <p className="result">{answerMin}:{answerSec}</p>
                 </div>
             )}

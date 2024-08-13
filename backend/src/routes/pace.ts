@@ -4,8 +4,14 @@ import * as helpers from '../helpers/functions';
 
 // PaceHandler is the handler function for the /pace endpoint. It only accepts POST requests.
 export function PaceHandler(req: Request, res: Response): void {
+
+    // Set the CORS headers
+    helpers.SetCORSHeaders(res);
+
     if (req.method === constants.HTTP_METHOD_POST) {
         CalculatePace(req, res);
+    } else if (req.method === constants.HTTP_METHOD_OPTIONS) {
+        res.status(constants.HTTP_STATUS_NO_CONTENT).send();
     } else {
         res.status(constants.HTTP_STATUS_METHOD_NOT_ALLOWED).send(
             constants.TEXT_METHOD_NOT_ALLOWED

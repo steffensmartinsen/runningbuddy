@@ -96,7 +96,7 @@ const DistanceHandler = () => {
 
             {response && (
                 <div className="resultContainer">
-                    <p className="distanceText">Distance:</p> 
+                    <p className="resultText">Distance:</p> 
                     <p className="result"> {distance} {distanceUnit}</p>
                 </div>
             )}
