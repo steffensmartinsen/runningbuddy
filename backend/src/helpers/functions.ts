@@ -1,4 +1,5 @@
 import * as constants from '../constants/';
+import { Response } from 'express';
 // Desc: Helper functions used throughout the application
 
 // FormatNumber formats a number to have a leading zero if it is less than 10
@@ -92,4 +93,11 @@ export function AlignUnits(distanceUnit: string, paceUnit: string, distance: num
         return distance * constants.CONVERSION_MILES_AND_KM;
     }
     return distance / constants.CONVERSION_MILES_AND_KM;
+}
+
+// SetCORSHeaders sets the CORS headers for the response
+export function SetCORSHeaders(res: Response): void {
+    res.setHeader('Access-Control-Allow-Origin', constants.DEFAULT_URL);
+    res.setHeader('Access-Control-Allow-Methods', `${constants.HTTP_METHOD_POST}, ${constants.HTTP_METHOD_OPTIONS}`);
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 }

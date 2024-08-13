@@ -37,6 +37,7 @@ exports.TimeToMinutes = TimeToMinutes;
 exports.TimeToSeconds = TimeToSeconds;
 exports.ExtractMinAndSec = ExtractMinAndSec;
 exports.AlignUnits = AlignUnits;
+exports.SetCORSHeaders = SetCORSHeaders;
 const constants = __importStar(require("../constants/"));
 // Desc: Helper functions used throughout the application
 // FormatNumber formats a number to have a leading zero if it is less than 10
@@ -110,4 +111,10 @@ function AlignUnits(distanceUnit, paceUnit, distance) {
         return distance * constants.CONVERSION_MILES_AND_KM;
     }
     return distance / constants.CONVERSION_MILES_AND_KM;
+}
+// SetCORSHeaders sets the CORS headers for the response
+function SetCORSHeaders(res) {
+    res.setHeader('Access-Control-Allow-Origin', constants.DEFAULT_URL);
+    res.setHeader('Access-Control-Allow-Methods', `${constants.HTTP_METHOD_POST}, ${constants.HTTP_METHOD_OPTIONS}`);
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 }

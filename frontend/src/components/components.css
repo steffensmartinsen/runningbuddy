@@ -1,4 +1,4 @@
-input.inputField {
+input.smallInput {
     background-color: white;
     border: 1px solid black;
     border-radius: 5px;
@@ -9,6 +9,25 @@ input.inputField {
     font-size: 14px;
   }
 
-  .chakra-input__group.css-1y0e7gb {
+  /* .chakra-input__group.css-1y0e7gb {
     width: 60px;
+  } */
+
+  .chakra-input__group.smallInput.css-1y0e7gb {
+    width: 60px;
+  }
+
+  .chakra-input__group.largeInput.css-1y0e7gb {
+    width: 120px;
+  }
+
+  input.largeInput {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0px 5px;
+    padding: 0px;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
   }

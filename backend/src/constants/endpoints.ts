@@ -3,8 +3,14 @@
 // PORT is the port number on which the server will run
 export const PORT = 8080;
 
+// SERVERPORT is the port number on which the server will run
+export const SERVERPORT = 3000;
+
 // ROOT is the root path of the application
 export const ROOT = '/';
+
+// DEFAULT_URL is the default URL of the application
+export const DEFAULT_URL = `http://localhost:${SERVERPORT}`;
 
 // END_PACE_CALCULATOR is the path to the pace calculator endpoint
 export const ENDPOINT_PACE_CALCULATOR = '/pace-calculator';

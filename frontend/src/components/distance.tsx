@@ -67,7 +67,7 @@ const DistanceHandler = () => {
             
             <div className="metricContainer">
                 <div className="metric">
-                    <p className="subTitle">Answer metric:</p>
+                    <p className="subTitle">Answer unit:</p>
                     <MetricButtons metric={distanceUnit} setMetric={setDistanceUnit} />
                 </div>
             </div>

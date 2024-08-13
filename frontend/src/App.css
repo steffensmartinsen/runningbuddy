@@ -190,6 +190,13 @@
   font-size: medium;
 }
 
+.inContainerText {
+  font-size: medium;
+  padding: 8px 0px;
+  padding-left: 10px;
+  color: rgb(187, 13, 13);
+}
+
 .chakra-select__wrapper.css-42b2qy {
   width: 60px;
 }

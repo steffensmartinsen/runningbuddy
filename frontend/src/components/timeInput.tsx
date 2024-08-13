@@ -1,4 +1,5 @@
 import InputField from './inputField';
+import * as constants from '../constants';
 
 interface TimeInputProps {
     hour: string;
@@ -16,19 +17,22 @@ function TimeInput({ hour, min, sec, setHour, setMin, setSec }: TimeInputProps) 
         <div className="timingsContainer">
             <p className="inContainerTitle">Time:</p>
             <InputField
-            placeholder='hour'
+            className={constants.CLASS_SMALL_INPUT}
+            placeholder={constants.TIME.HOUR}
             value={hour}
             onChange={setHour}
             />
             :
             <InputField
-            placeholder='min'
+            className={constants.CLASS_SMALL_INPUT}
+            placeholder={constants.TIME.MIN}
             value={min}
             onChange={setMin}
             />
             :
             <InputField
-            placeholder='sec'
+            className={constants.CLASS_SMALL_INPUT}
+            placeholder={constants.TIME.SEC}
             value={sec}
             onChange={setSec}
             />

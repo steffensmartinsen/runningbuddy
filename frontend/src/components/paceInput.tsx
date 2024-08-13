@@ -1,6 +1,7 @@
 import React from "react";
 import InputField from "./inputField";
 import { Select } from "@chakra-ui/react";
+import * as constants from "../constants";
 
 interface PaceInputProps {
     paceMin: string;
@@ -21,12 +22,14 @@ function PaceInput({ paceMin, paceSec, metric, setMin, setSec, setMetric }: Pace
         <div className="timingsContainer">
             <p className="inContainerTitle">Pace:</p>
             <InputField
+            className={constants.CLASS_SMALL_INPUT}
             placeholder='min'
             value={paceMin}
             onChange={setMin}
             />
             :
             <InputField
+            className={constants.CLASS_SMALL_INPUT}
             placeholder='sec'
             value={paceSec}
             onChange={setSec}

@@ -5,19 +5,20 @@ import React from 'react';
 interface InputFieldProps {
     placeholder: string;
     value: string;
+    className: string;
     onChange: (e: string) => void;
 }
 
-function InputField({ placeholder, value, onChange }: InputFieldProps) {
+function InputField({ className, placeholder, value, onChange }: InputFieldProps) {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value);
     }
 
     return (
-        <InputGroup>
+        <InputGroup className={className}>
             <Input 
             placeholder={placeholder}
-            className="inputField" 
+            className={className} 
             value={value}
             onChange={handleChange}
             />
