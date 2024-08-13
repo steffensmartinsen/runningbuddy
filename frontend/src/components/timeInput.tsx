@@ -9,22 +9,26 @@ interface TimeInputProps {
     setSec: (value: string) => void;
 }
 
-function TimeInput({ hour, min, sec, setHour, setMin, setSec }: TimeInputProps) {
 
+function TimeInput({ hour, min, sec, setHour, setMin, setSec }: TimeInputProps) {
+    
     return ( 
         <div className="timingsContainer">
+            <p className="inContainerTitle">Time:</p>
             <InputField
-            placeholder='Hour'
+            placeholder='hour'
             value={hour}
             onChange={setHour}
             />
+            :
             <InputField
-            placeholder='Min'
+            placeholder='min'
             value={min}
             onChange={setMin}
             />
+            :
             <InputField
-            placeholder='Sec'
+            placeholder='sec'
             value={sec}
             onChange={setSec}
             />

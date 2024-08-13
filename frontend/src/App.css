@@ -21,9 +21,11 @@
 }
 
 .subTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: rgb(187, 13, 13);
-  margin-top: 20px;
-  align-self: start;
+  width: 130px;
 }
 
 .slogan {
@@ -127,8 +129,11 @@
 
 .timingsContainer {
   display: flex;
-  justify-content: space-around;
-  width: 100%;
+  justify-content: start;
+  align-items: center;
+  width: 80%;
+  font-size: 20px;
+  padding-top: 20px;
 }
 
 .inputField {
@@ -144,18 +149,22 @@
 
 .radioContainer {
   display: flex;
-  align-items: start;
-  width: 100%;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
 }
 
 .metricContainer {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
 .metric {
-  padding: 0px 60px;
+
+  display: flex;
+
 }
 
 .calculateButton {
@@ -171,6 +180,31 @@
   padding-right: 20px;
   color: rgb(216, 49, 49);
   font-weight: bold;
+}
+
+.inContainerTitle {
+  color: rgb(187, 13, 13);
+  font-weight: bold;
+  padding: 8px 0px;
+  padding-right: 8px;
+  font-size: medium;
+}
+
+.chakra-select__wrapper.css-42b2qy {
+  width: 60px;
+}
+
+select.inputField {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 0px 5px;
+  width: 100%;
+  height: 40px;
+}
+
+.explanation {
+  margin-bottom: 30px;
 }
 
 @media (max-width: 500px ) {
@@ -214,12 +248,10 @@
   }
 
   .explanation {
-    margin: 0px 25px;
+    margin-bottom: 30px;
   }
 
-  .metric {
-    padding: 0px 20px;
-  }
+
 }
 
 /* TODO Add tablet size support */

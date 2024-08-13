@@ -2,5 +2,13 @@ input.inputField {
     background-color: white;
     border: 1px solid black;
     border-radius: 5px;
-    margin: 0px 5%;
+    margin: 0px 5px;
+    padding: 0px;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .chakra-input__group.css-1y0e7gb {
+    width: 60px;
   }
