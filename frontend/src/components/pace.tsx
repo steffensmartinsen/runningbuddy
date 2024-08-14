@@ -92,7 +92,7 @@ const PaceHandler = () => {
             {response && (
                 <div className="resultContainer">
                     <p className="resultText">Pace:</p>
-                    <p className="result">{answerMin}:{answerSec}</p>
+                    <p className="result">{answerMin}:{answerSec} {answerUnit}/hr</p>
                 </div>
             )}
         </>
