@@ -50,6 +50,9 @@ const TimeHandler = () => {
                 console.log(data);
                 setResponse(true);
                 setFiveK(data.fiveK);
+                setTenK(data.tenK);
+                setHalfMarathon(data.halfMarathon);
+                setMarathon(data.marathon);
             }
             )
         }

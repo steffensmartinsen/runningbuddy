@@ -63,12 +63,12 @@ function CalculateTimes (req: Request, res: Response): void {
             minutes: helpers.FormatNumber(pace10k.minutes),
             seconds: helpers.FormatNumber(pace10k.seconds)
         },
-        "Half Marathon": {
+        "halfMarathon": {
             hours: helpers.FormatNumber(paceHalfMarathon.hours),
             minutes: helpers.FormatNumber(paceHalfMarathon.minutes),
             seconds: helpers.FormatNumber(paceHalfMarathon.seconds)
         },
-        "Marathon": {
+        "marathon": {
             hours: helpers.FormatNumber(paceMarathon.hours),
             minutes: helpers.FormatNumber(paceMarathon.minutes),
             seconds: helpers.FormatNumber(paceMarathon.seconds)
