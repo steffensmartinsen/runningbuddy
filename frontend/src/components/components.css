@@ -31,3 +31,17 @@ input.smallInput {
     width: 100%;
     font-size: 14px;
   }
+
+  .chakra-form-control.switchContainer.css-1kxonj9 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .chakra-form__label.switchLabel.css-g6pte {
+    margin: 0px;
+    margin-right: 10px;
+    color: rgb(187, 13, 13);
+  }

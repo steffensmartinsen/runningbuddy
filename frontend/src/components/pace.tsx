@@ -20,6 +20,9 @@ const PaceHandler = () => {
 
     const handleClick = () => {
 
+        //TODO - Add validation for the input fields
+
+        // Create the data object to send to the backend
         const data = {
             distanceUnit: distanceUnit,
             distance: Number(distance),
@@ -31,6 +34,7 @@ const PaceHandler = () => {
             paceUnit: answerUnit,
         }
 
+        // Send the data object to the backend
         fetch(constants.ENDPOINTS.PACE, {
             method: constants.HTTP_METHOD.POST,
             headers: {

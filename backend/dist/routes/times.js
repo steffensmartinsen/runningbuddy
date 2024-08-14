@@ -30,8 +30,13 @@ const helpers = __importStar(require("../helpers/functions"));
 //import { FormatNumber, ValidatePace, ValidateUnit, PaceMileToPaceKm } from '../helpers/functions';
 // CalculateTimesHandler is the function that serves the '/pace-calculator/times' path. It only accepts POST requests.
 function CalculateTimeHandler(req, res) {
+    // Set the CORS headers
+    helpers.SetCORSHeaders(res);
     if (req.method === constants.HTTP_METHOD_POST) {
         CalculateTimes(req, res);
+    }
+    else if (req.method === constants.HTTP_METHOD_OPTIONS) {
+        res.status(constants.HTTP_STATUS_NO_CONTENT).send();
     }
     else {
         res.status(constants.HTTP_STATUS_METHOD_NOT_ALLOWED).send(constants.TEXT_METHOD_NOT_ALLOWED);
@@ -61,12 +66,12 @@ function CalculateTimes(req, res) {
     let paceHalfMarathon = CalculateTime(unit, constants.DISTANCE_HALF_MARATHON, min, sec);
     let paceMarathon = CalculateTime(unit, constants.DISTANCE_MARATHON, min, sec);
     res.json({
-        "5K": {
+        "fiveK": {
             hours: helpers.FormatNumber(pace5k.hours),
             minutes: helpers.FormatNumber(pace5k.minutes),
             seconds: helpers.FormatNumber(pace5k.seconds)
         },
-        "10K": {
+        "tenK": {
             hours: helpers.FormatNumber(pace10k.hours),
             minutes: helpers.FormatNumber(pace10k.minutes),
             seconds: helpers.FormatNumber(pace10k.seconds)

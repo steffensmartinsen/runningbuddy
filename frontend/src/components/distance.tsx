@@ -7,12 +7,12 @@ import * as constants from '../constants';
 
 const DistanceHandler = () => {
     const [paceUnit, setPaceUnit] = React.useState('km');
-    const [distanceUnit, setDistanceUnit] = React.useState('km');
     const [timeHour, setTimeHour] = React.useState('');
     const [timeMin, setTimeMin] = React.useState('');
     const [timeSec, setTimeSec] = React.useState('');
     const [paceMin, setPaceMin] = React.useState('');
     const [paceSec, setPaceSec] = React.useState('');
+    const [distanceUnit, setDistanceUnit] = React.useState('km');
     const [distance, setDistance] = React.useState('');
     const [response, setResponse] = React.useState(false);
 

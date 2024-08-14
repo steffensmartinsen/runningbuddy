@@ -6,8 +6,14 @@ import * as helpers from '../helpers/functions';
 
 // CalculateTimesHandler is the function that serves the '/pace-calculator/times' path. It only accepts POST requests.
 export function CalculateTimeHandler(req: Request, res: Response): void {
+
+    // Set the CORS headers
+    helpers.SetCORSHeaders(res);
+
     if (req.method === constants.HTTP_METHOD_POST) {
         CalculateTimes(req, res);
+    } else if (req.method === constants.HTTP_METHOD_OPTIONS) {
+        res.status(constants.HTTP_STATUS_NO_CONTENT).send();
     } else {
         res.status(constants.HTTP_STATUS_METHOD_NOT_ALLOWED).send(
             constants.TEXT_METHOD_NOT_ALLOWED
@@ -47,12 +53,12 @@ function CalculateTimes (req: Request, res: Response): void {
     let paceMarathon = CalculateTime(unit, constants.DISTANCE_MARATHON, min, sec);
 
     res.json({
-        "5K": {
+        "fiveK": {
             hours: helpers.FormatNumber(pace5k.hours),
             minutes: helpers.FormatNumber(pace5k.minutes),
             seconds: helpers.FormatNumber(pace5k.seconds)
         },
-        "10K": {
+        "tenK": {
             hours: helpers.FormatNumber(pace10k.hours),
             minutes: helpers.FormatNumber(pace10k.minutes),
             seconds: helpers.FormatNumber(pace10k.seconds)
