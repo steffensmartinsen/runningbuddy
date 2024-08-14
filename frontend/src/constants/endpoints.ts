@@ -10,5 +10,5 @@ export const ENDPOINTS = {
     DISTANCE: `${BASE_URL}/distance`,
     SPECIFIEDDISTANCE: `${BASE_URL}/specified-distance`,
     PACE: `${BASE_URL}/pace`,
-    TIME: `${BASE_URL}/time`
+    TIME: `${BASE_URL}/times`
 }

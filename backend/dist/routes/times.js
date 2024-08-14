@@ -27,7 +27,6 @@ exports.CalculateTimeHandler = CalculateTimeHandler;
 exports.CalculateSpecifiedDistanceTimeHandler = CalculateSpecifiedDistanceTimeHandler;
 const constants = __importStar(require("../constants"));
 const helpers = __importStar(require("../helpers/functions"));
-//import { FormatNumber, ValidatePace, ValidateUnit, PaceMileToPaceKm } from '../helpers/functions';
 // CalculateTimesHandler is the function that serves the '/pace-calculator/times' path. It only accepts POST requests.
 function CalculateTimeHandler(req, res) {
     // Set the CORS headers
@@ -44,8 +43,13 @@ function CalculateTimeHandler(req, res) {
 }
 // CalculateSpecifiedDistanceTimeHandler is the function that serves the '/pace-calculator/specified-distance/' path. It only accepts POST requests.
 function CalculateSpecifiedDistanceTimeHandler(req, res) {
+    // Set the CORS headers
+    helpers.SetCORSHeaders(res);
     if (req.method === constants.HTTP_METHOD_POST) {
         CalculateSpecifiedDistance(req, res);
+    }
+    else if (req.method === constants.HTTP_METHOD_OPTIONS) {
+        res.status(constants.HTTP_STATUS_NO_CONTENT).send();
     }
     else {
         res.status(constants.HTTP_STATUS_METHOD_NOT_ALLOWED).send(constants.TEXT_METHOD_NOT_ALLOWED);
@@ -76,12 +80,12 @@ function CalculateTimes(req, res) {
             minutes: helpers.FormatNumber(pace10k.minutes),
             seconds: helpers.FormatNumber(pace10k.seconds)
         },
-        "Half Marathon": {
+        "halfMarathon": {
             hours: helpers.FormatNumber(paceHalfMarathon.hours),
             minutes: helpers.FormatNumber(paceHalfMarathon.minutes),
             seconds: helpers.FormatNumber(paceHalfMarathon.seconds)
         },
-        "Marathon": {
+        "marathon": {
             hours: helpers.FormatNumber(paceMarathon.hours),
             minutes: helpers.FormatNumber(paceMarathon.minutes),
             seconds: helpers.FormatNumber(paceMarathon.seconds)
@@ -96,6 +100,7 @@ function CalculateSpecifiedDistance(req, res) {
     // Validate the input parameters
     if (!helpers.ValidateTimeEndpoint(distanceUnit, min, sec, distance)) {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(constants.INVALID_INPUT);
+        console.log("Invalid input");
         return;
     }
     // Handle case where distance is miles and pace is in km

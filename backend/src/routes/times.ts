@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import * as constants from '../constants';
 import { DistanceTime } from '../structs/calculation-structs';
 import * as helpers from '../helpers/functions';
-//import { FormatNumber, ValidatePace, ValidateUnit, PaceMileToPaceKm } from '../helpers/functions';
 
 // CalculateTimesHandler is the function that serves the '/pace-calculator/times' path. It only accepts POST requests.
 export function CalculateTimeHandler(req: Request, res: Response): void {
@@ -23,8 +22,14 @@ export function CalculateTimeHandler(req: Request, res: Response): void {
 
 // CalculateSpecifiedDistanceTimeHandler is the function that serves the '/pace-calculator/specified-distance/' path. It only accepts POST requests.
 export function CalculateSpecifiedDistanceTimeHandler(req: Request, res: Response): void {
+
+    // Set the CORS headers
+    helpers.SetCORSHeaders(res);
+
     if (req.method === constants.HTTP_METHOD_POST) {
         CalculateSpecifiedDistance(req, res);
+    } else if (req.method === constants.HTTP_METHOD_OPTIONS) {
+        res.status(constants.HTTP_STATUS_NO_CONTENT).send();
     } else {
         res.status(constants.HTTP_STATUS_METHOD_NOT_ALLOWED).send(
             constants.TEXT_METHOD_NOT_ALLOWED
@@ -87,6 +92,7 @@ function CalculateSpecifiedDistance(req: Request, res: Response): void {
         res.status(constants.HTTP_STATUS_BAD_REQUEST).send(
             constants.INVALID_INPUT
         );
+        console.log("Invalid input");
         return;
     }
 

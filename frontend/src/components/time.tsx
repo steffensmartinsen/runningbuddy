@@ -1,6 +1,6 @@
 import React from 'react';
 import PaceInput from './paceInput';
-import { FormControl, FormLabel, Switch } from '@chakra-ui/react';
+import { FormControl, FormLabel, Switch, Button } from '@chakra-ui/react';
 import DistanceInput from './distanceInput';
 import * as constants from '../constants';
 import './components.css';
@@ -17,7 +17,10 @@ const TimeHandler = () => {
     const [specifyDistance, setSpecifyDistance] = React.useState(false);
     const [distanceUnit, setDistanceUnit] = React.useState('km');
     const [distance, setDistance] = React.useState('');
+    const [customTime, setCustomTime] = React.useState(null);
     const [response, setResponse] = React.useState(false);
+
+    console.log(specifyDistance);
 
     const handleClick = () => {
 
@@ -25,11 +28,9 @@ const TimeHandler = () => {
             
             // Create the data object to send to the backend
             const data = {
-                paceUnit: paceUnit,
-                pace: {
-                    min: Number(paceMin),
-                    sec: Number(paceSec)
-                }
+                unit: paceUnit,
+                min: Number(paceMin),
+                sec: Number(paceSec)
             }
 
             // Send the data object to the backend
@@ -53,8 +54,41 @@ const TimeHandler = () => {
                 setTenK(data.tenK);
                 setHalfMarathon(data.halfMarathon);
                 setMarathon(data.marathon);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        } else {
+
+            // Create the data object to send to the backend
+            const data = {
+                distanceUnit: distanceUnit,
+                distance: Number(distance),
+                min: Number(paceMin),
+                sec: Number(paceSec),
+                paceUnit: paceUnit
             }
-            )
+
+            // Send the data object to the backend
+            fetch(constants.ENDPOINTS.SPECIFIEDDISTANCE, {
+                method: constants.HTTP_METHOD.POST,
+                headers: {
+                    'Content-Type': constants.CONTENT_TYPE.JSON,
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Request failed.');
+            })
+            .then(data => {
+                console.log(data);
+                setResponse(true);
+                setCustomTime(data);
+            })
         }
     }
 
@@ -89,6 +123,10 @@ const TimeHandler = () => {
                 setUnit={setDistanceUnit} 
                 />
             )}
+
+            <Button colorScheme='red' className="calculateButton" size='md' onClick={handleClick}>
+                Calculate
+            </Button>
         </>
     )
 }
