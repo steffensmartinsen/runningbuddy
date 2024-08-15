@@ -253,7 +253,8 @@ select.inputField {
   }
 
   .leftContainer.selected, .centerContainer.selected, .rightContainer.selected {
-    border-top-left-radius: 0%; 
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%; 
   }
 
   .timeContainer {
@@ -263,7 +264,6 @@ select.inputField {
   .explanation {
     margin-bottom: 30px;
   }
-
 
 }
 
