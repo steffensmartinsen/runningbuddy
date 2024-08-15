@@ -78,7 +78,7 @@ const DistanceHandler = () => {
         <>
             <h1 className="tabH1">Calculate Distance</h1>
             <p className="explanation">Provide the time of your run and the 
-                pace for the run in total to calculate the distance of the run.</p>
+                pace for the run in total to calculate the distance of your run.</p>
             
             <div className="metricContainer">
                 <div className="metric">

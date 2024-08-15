@@ -37,7 +37,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
-  max-width: 800px;
+  max-width: 650px;
   justify-items: center;
   align-items: center;
   margin-top: 40px;
@@ -120,16 +120,15 @@
   justify-content: start;
   align-items: center;
   width: 100%;
-  max-width: 800px;
+  max-width: 650px;
   padding-bottom: 50px;
-  padding-left: 15em;
-  padding-right: 15em;
+  padding: 60px;
   background-color: gainsboro;
 }
 
 .timingsContainer {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   width: 80%;
   font-size: 20px;
@@ -231,7 +230,7 @@ select.inputField {
   color: rgb(187, 13, 13)
 }
 
-@media (max-width: 500px ) {
+@media (max-width: 480px) {
   
   .mainContainer {
     align-items: start;
@@ -278,4 +277,6 @@ select.inputField {
 
 }
 
-/* TODO Add tablet size support */
+@media (max-width: 768px) {
+
+}
