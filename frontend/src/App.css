@@ -230,7 +230,7 @@ select.inputField {
   color: rgb(187, 13, 13)
 }
 
-@media (max-width: 480px) {
+@media (max-width: 650px) {
   
   .mainContainer {
     align-items: start;
@@ -238,12 +238,14 @@ select.inputField {
 
   .mainContent {
     margin-top: 20px;
-    width: 100%;
+    width: 102%;
   }
 
   .calculationContainer {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
+    border-right: none;
+    border-left: none;
   }
 
   .rightContainer:hover {
@@ -273,10 +275,13 @@ select.inputField {
 
   .explanation {
     margin-bottom: 30px;
+    padding: 0px 60px;
   }
 
 }
 
 @media (max-width: 768px) {
-
+  .calculationContent {
+    padding: 60px 30px;
+  }
 }
