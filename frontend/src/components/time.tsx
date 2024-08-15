@@ -17,10 +17,14 @@ const TimeHandler = () => {
     const [specifyDistance, setSpecifyDistance] = React.useState(false);
     const [distanceUnit, setDistanceUnit] = React.useState('km');
     const [distance, setDistance] = React.useState('');
-    const [customTime, setCustomTime] = React.useState(null);
+    const [customTime, setCustomTime] = React.useState<{ hours: number; minutes: number; seconds: number } | null>(null);
     const [response, setResponse] = React.useState(false);
 
     const handleClick = () => {
+
+        if (response) {
+            setResponse(false);
+        }
 
         if (!specifyDistance) {
             
@@ -110,7 +114,10 @@ const TimeHandler = () => {
 
             <FormControl className="switchContainer">
                 <FormLabel className="switchLabel">Specified Distance</FormLabel>
-                <Switch colorScheme="red" onChange={() => setSpecifyDistance(!specifyDistance)} />
+                <Switch colorScheme="red" onChange={() => {
+                    setSpecifyDistance(!specifyDistance);
+                    setResponse(false);
+                }} />
             </FormControl>
 
             {specifyDistance && (
@@ -126,7 +133,7 @@ const TimeHandler = () => {
                 Calculate
             </Button>
 
-            {response && (
+            {response && !specifyDistance && (
                 <div className="multiTimeContainer">
                     <div className="resultContainer">
                         <p className="resultText">5K:</p> 
@@ -145,6 +152,13 @@ const TimeHandler = () => {
                         <p className='result'>{marathon?.hours}:{marathon?.minutes}:{marathon?.seconds}</p>
                     </div>
                 </div>
+            )}
+
+            {response && specifyDistance && (
+                <div className="resultContainer">
+                    <p className="resultText">Time:</p> 
+                    <p className="result">{customTime?.hours}:{customTime?.minutes}:{customTime?.seconds}</p>
+                </div>    
             )}
         </>
     )
