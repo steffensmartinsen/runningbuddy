@@ -226,6 +226,11 @@ select.inputField {
   margin-top: 20px;
 }
 
+.distanceUnit {
+  margin-left: 4px;
+  color: rgb(187, 13, 13)
+}
+
 @media (max-width: 500px ) {
   
   .mainContainer {

@@ -2,10 +2,9 @@ import React from 'react';
 import { Button } from '@chakra-ui/react';
 import MetricButtons from './metricButtons';
 import DistanceInput from './distanceInput';
-import PaceInput from './paceInput';
 import * as constants from '../constants';
-import { error } from 'console';
 import TimeInput from './timeInput';
+import { ValidateDistance, ValidateTime } from '../utils/validation';
 
 const PaceHandler = () => {
     const [distanceUnit, setDistanceUnit] = React.useState('km');
@@ -17,10 +16,23 @@ const PaceHandler = () => {
     const [answerMin, setAnswerMin] = React.useState('');
     const [answerSec, setAnswerSec] = React.useState('');
     const [response, setResponse] = React.useState(false);
+    const [errorMessages, setErrorMessages] = React.useState('');
 
     const handleClick = () => {
 
-        //TODO - Add validation for the input fields
+        // Validate the distance input
+        if (!ValidateDistance(distance)) {
+            setErrorMessages('Invalid input');
+            setResponse(false);
+            return;
+        }
+
+        // Validate the time input
+        if (!ValidateTime(timeHour, timeMin, timeSec)) {
+            setErrorMessages('Invalid input');
+            setResponse(false);
+            return;
+        }
 
         // Create the data object to send to the backend
         const data = {
@@ -53,6 +65,7 @@ const PaceHandler = () => {
             setResponse(true);
             setAnswerMin(data.minutes);
             setAnswerSec(data.seconds);
+            setErrorMessages('');
         })
         .catch(error => {
             console.error(error);
@@ -93,10 +106,17 @@ const PaceHandler = () => {
                 Calculate
             </Button>
 
+            {errorMessages && (
+                <div className="errorContainer">
+                    <p className="errorText">{errorMessages}</p>
+                </div>
+            )}
+
             {response && (
                 <div className="resultContainer">
                     <p className="resultText">Pace:</p>
-                    <p className="result">{answerMin}:{answerSec} {answerUnit}/hr</p>
+                    <p className="result">{answerMin}:{answerSec}</p>
+                    <p className="distanceUnit">{answerUnit}/hr</p>
                 </div>
             )}
         </>
