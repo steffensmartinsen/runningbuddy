@@ -38,7 +38,7 @@ const ValidateDistance = (distance: string): boolean => {
 
 // Atomic validation function for checking if an input is a number
 const ValidateNumber = (num: string): boolean => {
-    return !isNaN(Number(num));
+    return !isNaN(Number(num)) && num !== '';
 };
 
 // Atomic validation function for hours

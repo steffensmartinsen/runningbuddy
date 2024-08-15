@@ -4,6 +4,7 @@ import TimeInput from './timeInput';
 import PaceInput from './paceInput';
 import MetricButtons from './metricButtons';
 import * as constants from '../constants';
+import {ValidateTime, ValidatePace} from '../utils/validation';
 
 const DistanceHandler = () => {
     const [paceUnit, setPaceUnit] = React.useState('km');
@@ -15,10 +16,23 @@ const DistanceHandler = () => {
     const [distanceUnit, setDistanceUnit] = React.useState('km');
     const [distance, setDistance] = React.useState('');
     const [response, setResponse] = React.useState(false);
+    const [errorMessages, setErrorMessages] = React.useState('');
 
     const handleClick = () => {
 
-        //TODO - Add validation for the input fields
+        // Check if the time input is valid
+        if (!ValidateTime(timeHour, timeMin, timeSec)) {
+            setErrorMessages('Invalid input');
+            setResponse(false);
+            return;
+        }
+
+        // Check if the pace input is valid
+        if (!ValidatePace(paceMin, paceSec)) {
+            setErrorMessages('Invalid input');
+            setResponse(false);
+            return;
+        }
 
         // Create the data object to send to the backend
         const data = {
@@ -53,6 +67,7 @@ const DistanceHandler = () => {
             console.log(data);
             setResponse(true);
             setDistance(data.distance);
+            setErrorMessages('');
         })
         .catch(error => {
             console.error(error);
@@ -93,6 +108,12 @@ const DistanceHandler = () => {
             <Button colorScheme='red' className="calculateButton" size='md' onClick={handleClick}>
                 Calculate
             </Button>
+
+            {errorMessages && (
+                <div className="errorContainer">
+                    <p className="errorText">{errorMessages}</p>
+                </div>
+            )}
 
             {response && (
                 <div className="resultContainer">
