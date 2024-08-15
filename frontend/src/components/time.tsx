@@ -10,17 +10,15 @@ const TimeHandler = () => {
     const [paceUnit, setPaceUnit] = React.useState('km');
     const [paceMin, setPaceMin] = React.useState('');
     const [paceSec, setPaceSec] = React.useState('');
-    const [fiveK, setFiveK] = React.useState(null);
-    const [tenK, setTenK] = React.useState(null);
-    const [halfMarathon, setHalfMarathon] = React.useState(null);
-    const [marathon, setMarathon] = React.useState(null);
+    const [fiveK, setFiveK] = React.useState<{ hours: number; minutes: number; seconds: number } | null>(null)
+    const [tenK, setTenK] = React.useState<{ hours: number; minutes: number; seconds: number } | null>(null);
+    const [halfMarathon, setHalfMarathon] = React.useState<{ hours: number; minutes: number; seconds: number } | null>(null);
+    const [marathon, setMarathon] = React.useState<{ hours: number; minutes: number; seconds: number } | null>(null);
     const [specifyDistance, setSpecifyDistance] = React.useState(false);
     const [distanceUnit, setDistanceUnit] = React.useState('km');
     const [distance, setDistance] = React.useState('');
     const [customTime, setCustomTime] = React.useState(null);
     const [response, setResponse] = React.useState(false);
-
-    console.log(specifyDistance);
 
     const handleClick = () => {
 
@@ -47,7 +45,7 @@ const TimeHandler = () => {
                 }
                 throw new Error('Request failed.');
             })
-            .then (data => {
+            .then(data => {
                 console.log(data);
                 setResponse(true);
                 setFiveK(data.fiveK);
@@ -127,6 +125,27 @@ const TimeHandler = () => {
             <Button colorScheme='red' className="calculateButton" size='md' onClick={handleClick}>
                 Calculate
             </Button>
+
+            {response && (
+                <div className="multiTimeContainer">
+                    <div className="resultContainer">
+                        <p className="resultText">5K:</p> 
+                        <p className='result'>{fiveK?.hours}:{fiveK?.minutes}:{fiveK?.seconds}</p>
+                    </div>
+                    <div className="resultContainer">
+                        <p className="resultText">10K:</p> 
+                        <p className='result'>{tenK?.hours}:{tenK?.minutes}:{tenK?.seconds}</p>
+                    </div>
+                    <div className="resultContainer">
+                        <p className="resultText">Half Marathon:</p> 
+                        <p className='result'>{halfMarathon?.hours}:{halfMarathon?.minutes}:{halfMarathon?.seconds}</p>
+                    </div>
+                    <div className="resultContainer">
+                        <p className="resultText">Marathon:</p> 
+                        <p className='result'>{marathon?.hours}:{marathon?.minutes}:{marathon?.seconds}</p>
+                    </div>
+                </div>
+            )}
         </>
     )
 }

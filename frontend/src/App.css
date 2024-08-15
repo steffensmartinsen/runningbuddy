@@ -174,10 +174,16 @@
 .resultContainer {
   margin-top: 20px;
   display: flex;
+  justify-content: flex-end;
+}
+
+.multiTimeContainer {
+  display: flex;
+  flex-direction: column;
 }
 
 .resultText {
-  padding-right: 20px;
+  padding-right: 8px;
   color: rgb(216, 49, 49);
   font-weight: bold;
 }
