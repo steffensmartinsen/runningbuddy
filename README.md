@@ -35,22 +35,22 @@ The *sec* input parameter must be less than 60, and both input parameters must b
 **Example Response Body:**
 ```
 {
-    "5K": {
+    "fiveK": {
         "hours": "00",
         "minutes": "29",
         "seconds": "10"
     },
-    "10K": {
+    "tenK": {
         "hours": "00",
         "minutes": "58",
         "seconds": "20"
     },
-    "Half Marathon": {
+    "halfMarathon": {
         "hours": "02",
         "minutes": "03",
         "seconds": "04"
     },
-    "Marathon": {
+    "marathon": {
         "hours": "04",
         "minutes": "06",
         "seconds": "08"
