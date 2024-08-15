@@ -4,6 +4,7 @@ import { FormControl, FormLabel, Switch, Button } from '@chakra-ui/react';
 import DistanceInput from './distanceInput';
 import * as constants from '../constants';
 import './components.css';
+import { ValidatePace, ValidateDistance } from '../utils/validation';
 
 const TimeHandler = () => {
 
@@ -19,8 +20,16 @@ const TimeHandler = () => {
     const [distance, setDistance] = React.useState('');
     const [customTime, setCustomTime] = React.useState<{ hours: number; minutes: number; seconds: number } | null>(null);
     const [response, setResponse] = React.useState(false);
+    const [errorMessages, setErrorMessages] = React.useState('');
 
     const handleClick = () => {
+
+        // Check if the pace input is valid
+        if (!ValidatePace(paceMin, paceSec)) {
+            setErrorMessages('Invalid input');
+            setResponse(false);
+            return;
+        }
 
         if (response) {
             setResponse(false);
@@ -56,12 +65,20 @@ const TimeHandler = () => {
                 setTenK(data.tenK);
                 setHalfMarathon(data.halfMarathon);
                 setMarathon(data.marathon);
+                setErrorMessages('');
             })
             .catch(error => {
                 console.error(error);
             });
 
         } else {
+
+            // Validate the distance input
+            if (!ValidateDistance(distance)) {
+                setErrorMessages('Invalid input');
+                setResponse(false);
+                return;
+            }
 
             // Create the data object to send to the backend
             const data = {
@@ -90,6 +107,7 @@ const TimeHandler = () => {
                 console.log(data);
                 setResponse(true);
                 setCustomTime(data);
+                setErrorMessages('');
             })
         }
     }
@@ -117,6 +135,7 @@ const TimeHandler = () => {
                 <Switch colorScheme="red" onChange={() => {
                     setSpecifyDistance(!specifyDistance);
                     setResponse(false);
+                    setErrorMessages('');
                 }} />
             </FormControl>
 
@@ -132,6 +151,12 @@ const TimeHandler = () => {
             <Button colorScheme='red' className="calculateButton" size='md' onClick={handleClick}>
                 Calculate
             </Button>
+
+            {errorMessages && (
+                <div className="errorContainer">
+                    <p className="errorText">{errorMessages}</p>
+                </div>
+            )}
 
             {response && !specifyDistance && (
                 <div className="multiTimeContainer">
