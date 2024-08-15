@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: start;
-  min-height: 100vh;
+  min-height: 120vh;
   background-color: #f5f5f5;
 }
 
@@ -18,6 +18,7 @@
 
 .title {
   color: rgb(187, 13, 13);
+  font-size: 30px;
 }
 
 .subTitle {
@@ -161,9 +162,7 @@
 }
 
 .metric {
-
   display: flex;
-
 }
 
 .calculateButton {
@@ -217,6 +216,7 @@ select.inputField {
 
 .explanation {
   margin-bottom: 30px;
+  padding: 0px 100px;
 }
 
 .errorContainer {
@@ -280,8 +280,22 @@ select.inputField {
 
 }
 
-@media (max-width: 768px) {
+@media (min-width: 651px) and (max-width: 768px) {
   .calculationContent {
     padding: 60px 30px;
+  }
+
+  .mainContent {
+    width: 80%;
+  }
+
+  .explanation {
+    padding: 0px 100px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 920px) {
+  .explanation {
+    padding: 0px 60px;
   }
 }
