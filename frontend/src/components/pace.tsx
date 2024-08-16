@@ -74,7 +74,7 @@ const PaceHandler = () => {
 
     return (
         <>
-            <h1 className="tabH1">PaceHandler</h1>
+            <h1 className="tabH1">Calculate Pace</h1>
             <p className="explanation">Provide the distance of your run
                 and the time it took to complete it to calculate the pace of the run.
             </p>
