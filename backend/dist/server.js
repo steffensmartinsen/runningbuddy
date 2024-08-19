@@ -30,7 +30,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const constants = __importStar(require("./constants"));
 const home_1 = require("./routes/home");
+const dotenv_1 = __importDefault(require("dotenv"));
 const routes = require('./routes/index');
+// Load the environment variables from the .env file
+dotenv_1.default.config();
 // Create an Express application
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -39,7 +42,7 @@ app.get(constants.ROOT, home_1.Home);
 // Serve the pace calculator endpoint
 app.use(constants.ENDPOINT_PACE_CALCULATOR, routes);
 // Specify the port number for the server
-const port = constants.PORT;
+const port = constants.SERVER_PORT;
 // Start the server and listen on the specified port
 app.listen(port, () => {
     // Log a message when the server is successfully running

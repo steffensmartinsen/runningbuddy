@@ -1,16 +1,19 @@
 // Desc: Constants for the endpoints of the application
 
 // PORT is the port number on which the server will run
-export const PORT = 8080;
+export const SERVER_PORT = process.env.SERVER_PORT || "8080";
 
 // SERVERPORT is the port number on which the server will run
-export const SERVERPORT = 3000;
+export const CLIENT_PORT = process.env.CLIENT_PORT ||  "3000";
+
+// LOCALHOST is the localhost URL
+const LOCALHOST = process.env.LOCALHOST || "http://localhost:";
 
 // ROOT is the root path of the application
 export const ROOT = '/';
 
-// DEFAULT_URL is the default URL of the application
-export const DEFAULT_URL = `http://localhost:${SERVERPORT}`;
+// DEFAULT_URL is the default URL of the REACT application
+export const DEFAULT_URL = `${LOCALHOST}${CLIENT_PORT}`;
 
 // END_PACE_CALCULATOR is the path to the pace calculator endpoint
 export const ENDPOINT_PACE_CALCULATOR = '/pace-calculator';
