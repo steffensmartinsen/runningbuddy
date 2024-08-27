@@ -4,5 +4,10 @@
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "framer-motion": "^11.3.21"
-  }
+  },
+
+  "scripts": {
+    "build": "npm run build --prefix client && tsc --build server",
+    "start": "node server/dist/index.js"
+  }  
 }
