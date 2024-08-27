@@ -105,7 +105,13 @@ const DistanceHandler = () => {
             setMetric={setPaceUnit}
             />
 
-            <Button colorScheme='red' className="calculateButton" size='md' onClick={handleClick}>
+            <Button 
+            colorScheme='red' 
+            className="calculateButton" 
+            size='md' 
+            onClick={handleClick}
+            onTouchEnd={handleClick}
+            >
                 Calculate
             </Button>
 
