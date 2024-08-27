@@ -7,16 +7,13 @@ export const SERVER_PORT = process.env.SERVER_PORT || "8080";
 export const CLIENT_PORT = process.env.CLIENT_PORT ||  "3000";
 
 // LOCALHOST is the localhost URL
-const LOCALHOST = process.env.LOCALHOST || "http://localhost:";
+export const PRODUCTION_URL = process.env.PRODUCTION_URL || "http://localhost:8080";
 
 // ROOT is the root path of the application
 export const ROOT = '/';
 
 // DEFAULT_URL is the default URL of the REACT application
-export const DEFAULT_URL = `${LOCALHOST}${CLIENT_PORT}`;
-
-// PRODUCTION_URL is the URL of the production application
-export const PRODUCTION_URL = `${LOCALHOST}${SERVER_PORT}`;
+export const DEFAULT_URL = `${PRODUCTION_URL}${CLIENT_PORT}`;
 
 // FRONTEND_URL is the URL of the frontend application
 export const FRONTEND_URL = process.env.FRONTEND_URL || "https://runningbuddy.onrender.com";

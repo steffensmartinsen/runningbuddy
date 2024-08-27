@@ -34,5 +34,5 @@ const port: string = constants.SERVER_PORT;
 // Start the server and listen on the specified port
 app.listen(port, () => {
   // Log a message when the server is successfully running
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on ${constants.PRODUCTION_URL}`);
 });

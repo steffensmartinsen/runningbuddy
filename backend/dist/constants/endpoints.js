@@ -1,19 +1,17 @@
 "use strict";
 // Desc: Constants for the endpoints of the application
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.REDIRECT_URL = exports.ENDPOINT_DISTANCE = exports.ENDPOINT_PACE = exports.ENDPOINT_SPECIFIED_DISTANCE = exports.ENDPOINT_TIMES = exports.ENDPOINT_PACE_CALCULATOR = exports.INDEX_HTML = exports.BUILD_DIR = exports.FRONTEND_DIR = exports.PARENT_DIR = exports.FRONTEND_URL = exports.PRODUCTION_URL = exports.DEFAULT_URL = exports.ROOT = exports.CLIENT_PORT = exports.SERVER_PORT = void 0;
+exports.REDIRECT_URL = exports.ENDPOINT_DISTANCE = exports.ENDPOINT_PACE = exports.ENDPOINT_SPECIFIED_DISTANCE = exports.ENDPOINT_TIMES = exports.ENDPOINT_PACE_CALCULATOR = exports.INDEX_HTML = exports.BUILD_DIR = exports.FRONTEND_DIR = exports.PARENT_DIR = exports.FRONTEND_URL = exports.DEFAULT_URL = exports.ROOT = exports.PRODUCTION_URL = exports.CLIENT_PORT = exports.SERVER_PORT = void 0;
 // PORT is the port number on which the server will run
 exports.SERVER_PORT = process.env.SERVER_PORT || "8080";
 // SERVERPORT is the port number on which the server will run
 exports.CLIENT_PORT = process.env.CLIENT_PORT || "3000";
 // LOCALHOST is the localhost URL
-const LOCALHOST = process.env.LOCALHOST || "http://localhost:";
+exports.PRODUCTION_URL = process.env.PRODUCTION_URL || "http://localhost:80";
 // ROOT is the root path of the application
 exports.ROOT = '/';
 // DEFAULT_URL is the default URL of the REACT application
-exports.DEFAULT_URL = `${LOCALHOST}${exports.CLIENT_PORT}`;
-// PRODUCTION_URL is the URL of the production application
-exports.PRODUCTION_URL = `${LOCALHOST}${exports.SERVER_PORT}`;
+exports.DEFAULT_URL = `${exports.PRODUCTION_URL}${exports.CLIENT_PORT}`;
 // FRONTEND_URL is the URL of the frontend application
 exports.FRONTEND_URL = process.env.FRONTEND_URL || "https://runningbuddy.onrender.com";
 // PARENT_DIR is the cd command to the parent directory
