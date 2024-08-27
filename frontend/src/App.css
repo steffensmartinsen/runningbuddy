@@ -261,7 +261,7 @@ select.inputField {
   }
 
   .calculationContent {
-    padding: 60px;
+    padding: 60px 0px;
   }
 
   .leftContainer.selected, .centerContainer.selected, .rightContainer.selected {
