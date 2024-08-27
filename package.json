@@ -7,7 +7,7 @@
   },
 
   "scripts": {
-    "build": "npm run build --prefix client && tsc --build server",
-    "start": "node server/dist/index.js"
+    "build": "npm run build --prefix frontend && tsc --build backend",
+    "start": "node backend/dist/server.js"
   }  
 }
