@@ -4,6 +4,6 @@ exports.Home = Home;
 const constants_1 = require("../constants");
 // Home is the function that serves the root path ('/')
 function Home(req, res) {
-    // Simply redirect to the pace calculator endpoint
-    res.redirect(301, constants_1.REDIRECT_URL);
+    res.send(`<p>The root path is not supported, please visit the pace calculator at </p><a href=${constants_1.REDIRECT_URL}>${constants_1.REDIRECT_URL}</a>`);
+    console.log("The root path is not supported, please visit the pace calculator at " + constants_1.REDIRECT_URL);
 }
