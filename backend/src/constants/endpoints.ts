@@ -19,7 +19,7 @@ export const DEFAULT_URL = `${LOCALHOST}${CLIENT_PORT}`;
 export const PRODUCTION_URL = `${LOCALHOST}${SERVER_PORT}`;
 
 // FRONTEND_URL is the URL of the frontend application
-export const FRONTEND_URL = process.env.FRONTEND_URL || DEFAULT_URL;
+export const FRONTEND_URL = process.env.FRONTEND_URL || "https://runningbuddy.onrender.com";
 
 // PARENT_DIR is the cd command to the parent directory
 export const PARENT_DIR = "..";
