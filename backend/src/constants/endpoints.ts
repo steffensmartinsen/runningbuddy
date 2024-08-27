@@ -18,6 +18,18 @@ export const DEFAULT_URL = `${LOCALHOST}${CLIENT_PORT}`;
 // FRONTEND_URL is the URL of the frontend application
 export const FRONTEND_URL = process.env.FRONTEND_URL || DEFAULT_URL;
 
+// PARENT_DIR is the cd command to the parent directory
+export const PARENT_DIR = "..";
+
+// FRONTEND_DIR is the name of the frontend directory
+export const FRONTEND_DIR = "frontend";
+
+// BUILD_DIR is the name of the build directory
+export const BUILD_DIR = "build";
+
+// INDEX_HTML is the name of the index.html file
+export const INDEX_HTML = "index.html";
+
 // END_PACE_CALCULATOR is the path to the pace calculator endpoint
 export const ENDPOINT_PACE_CALCULATOR = '/pace-calculator';
 
