@@ -1,7 +1,7 @@
 "use strict";
 // Desc: Constants for the endpoints of the application
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ENDPOINT_DISTANCE = exports.ENDPOINT_PACE = exports.ENDPOINT_SPECIFIED_DISTANCE = exports.ENDPOINT_TIMES = exports.ENDPOINT_PACE_CALCULATOR = exports.INDEX_HTML = exports.BUILD_DIR = exports.FRONTEND_DIR = exports.PARENT_DIR = exports.FRONTEND_URL = exports.PRODUCTION_URL = exports.DEFAULT_URL = exports.ROOT = exports.CLIENT_PORT = exports.SERVER_PORT = void 0;
+exports.REDIRECT_URL = exports.ENDPOINT_DISTANCE = exports.ENDPOINT_PACE = exports.ENDPOINT_SPECIFIED_DISTANCE = exports.ENDPOINT_TIMES = exports.ENDPOINT_PACE_CALCULATOR = exports.INDEX_HTML = exports.BUILD_DIR = exports.FRONTEND_DIR = exports.PARENT_DIR = exports.FRONTEND_URL = exports.PRODUCTION_URL = exports.DEFAULT_URL = exports.ROOT = exports.CLIENT_PORT = exports.SERVER_PORT = void 0;
 // PORT is the port number on which the server will run
 exports.SERVER_PORT = process.env.SERVER_PORT || "8080";
 // SERVERPORT is the port number on which the server will run
@@ -32,4 +32,7 @@ exports.ENDPOINT_TIMES = '/times';
 exports.ENDPOINT_SPECIFIED_DISTANCE = '/specified-distance';
 // ENDPOINT_PACE is the path to the pace endpoint
 exports.ENDPOINT_PACE = '/pace';
+// ENDPOINT_DISTANCE is the path to the distance endpoint
 exports.ENDPOINT_DISTANCE = "/distance";
+// REDIRECT_URL is the URL to redirect at the home page
+exports.REDIRECT_URL = `${exports.FRONTEND_URL}${exports.ENDPOINT_PACE_CALCULATOR}`;

@@ -5,6 +5,7 @@ import { REDIRECT_URL } from '../constants';
 export function Home (req: Request, res: Response): void {
 
     // Simply redirect to the pace calculator endpoint
-    res.redirect(301, "https://runningbuddy.onrender.com/pace-calculator");
+    res.redirect(301, REDIRECT_URL);
+    console.log("redirect: ", REDIRECT_URL);
 
 }
