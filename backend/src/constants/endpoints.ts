@@ -45,4 +45,8 @@ export const ENDPOINT_SPECIFIED_DISTANCE = '/specified-distance';
 // ENDPOINT_PACE is the path to the pace endpoint
 export const ENDPOINT_PACE = '/pace';
 
+// ENDPOINT_DISTANCE is the path to the distance endpoint
 export const ENDPOINT_DISTANCE = "/distance"
+
+// REDIRECT_URL is the URL to redirect at the home page
+export const REDIRECT_URL = `${FRONTEND_URL}${ENDPOINT_PACE_CALCULATOR}`;
