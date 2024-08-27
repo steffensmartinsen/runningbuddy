@@ -6,6 +6,7 @@ exports.ENDPOINT_DISTANCE = exports.ENDPOINT_PACE = exports.ENDPOINT_SPECIFIED_D
 exports.SERVER_PORT = process.env.SERVER_PORT || "8080";
 // SERVERPORT is the port number on which the server will run
 exports.CLIENT_PORT = process.env.CLIENT_PORT || "3000";
+// LOCALHOST is the localhost URL
 const LOCALHOST = process.env.LOCALHOST || "http://localhost:";
 // ROOT is the root path of the application
 exports.ROOT = '/';

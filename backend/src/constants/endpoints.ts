@@ -15,6 +15,9 @@ export const ROOT = '/';
 // DEFAULT_URL is the default URL of the REACT application
 export const DEFAULT_URL = `${LOCALHOST}${CLIENT_PORT}`;
 
+// FRONTEND_URL is the URL of the frontend application
+export const FRONTEND_URL = process.env.FRONTEND_URL || DEFAULT_URL;
+
 // END_PACE_CALCULATOR is the path to the pace calculator endpoint
 export const ENDPOINT_PACE_CALCULATOR = '/pace-calculator';
 

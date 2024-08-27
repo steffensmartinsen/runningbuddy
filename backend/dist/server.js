@@ -31,6 +31,7 @@ const express_1 = __importDefault(require("express"));
 const constants = __importStar(require("./constants"));
 const home_1 = require("./routes/home");
 const dotenv_1 = __importDefault(require("dotenv"));
+const path_1 = __importDefault(require("path"));
 const routes = require('./routes/index');
 // Load the environment variables from the .env file
 dotenv_1.default.config();
@@ -39,6 +40,12 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json());
 // Serve the root path of the application
 app.get(constants.ROOT, home_1.Home);
+// Serve static files from the React frontend
+app.use(express_1.default.static(path_1.default.join(__dirname, '..', '..', 'frontend', 'build')));
+// Handle react routing, return all requests to the React app
+app.get('*', (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, '..', '..', 'frontend', 'build', 'index.html'));
+});
 // Serve the pace calculator endpoint
 app.use(constants.ENDPOINT_PACE_CALCULATOR, routes);
 // Specify the port number for the server
