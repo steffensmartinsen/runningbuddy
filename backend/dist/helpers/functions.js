@@ -114,7 +114,7 @@ function AlignUnits(distanceUnit, paceUnit, distance) {
 }
 // SetCORSHeaders sets the CORS headers for the response
 function SetCORSHeaders(res) {
-    res.setHeader('Access-Control-Allow-Origin', constants.DEFAULT_URL);
+    res.setHeader('Access-Control-Allow-Origin', "*");
     res.setHeader('Access-Control-Allow-Methods', `${constants.HTTP_METHOD_POST}, ${constants.HTTP_METHOD_OPTIONS}`);
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 }

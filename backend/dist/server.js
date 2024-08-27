@@ -41,10 +41,10 @@ app.use(express_1.default.json());
 // Serve the root path of the application
 app.get(constants.ROOT, home_1.Home);
 // Serve static files from the React frontend
-app.use(express_1.default.static(path_1.default.join(__dirname, '..', '..', 'frontend', 'build')));
+app.use(express_1.default.static(path_1.default.join(__dirname, constants.PARENT_DIR, constants.PARENT_DIR, constants.FRONTEND_DIR, constants.BUILD_DIR)));
 // Handle react routing, return all requests to the React app
 app.get('*', (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, '..', '..', 'frontend', 'build', 'index.html'));
+    res.sendFile(path_1.default.join(__dirname, constants.PARENT_DIR, constants.PARENT_DIR, constants.FRONTEND_DIR, constants.BUILD_DIR, constants.INDEX_HTML));
 });
 // Serve the pace calculator endpoint
 app.use(constants.ENDPOINT_PACE_CALCULATOR, routes);
