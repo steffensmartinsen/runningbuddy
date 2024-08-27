@@ -99,6 +99,7 @@ export function AlignUnits(distanceUnit: string, paceUnit: string, distance: num
 export function SetCORSHeaders(res: Response): void {
     res.setHeader('Access-Control-Allow-Origin', constants.DEFAULT_URL);
     res.setHeader('Access-Control-Allow-Origin', constants.FRONTEND_URL);
+    res.setHeader('Access-Control-Allow-Origin', constants.PRODUCTION_URL);
     res.setHeader('Access-Control-Allow-Methods', `${constants.HTTP_METHOD_POST}, ${constants.HTTP_METHOD_OPTIONS}`);
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 }

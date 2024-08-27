@@ -15,6 +15,9 @@ export const ROOT = '/';
 // DEFAULT_URL is the default URL of the REACT application
 export const DEFAULT_URL = `${LOCALHOST}${CLIENT_PORT}`;
 
+// PRODUCTION_URL is the URL of the production application
+export const PRODUCTION_URL = `${LOCALHOST}${SERVER_PORT}`;
+
 // FRONTEND_URL is the URL of the frontend application
 export const FRONTEND_URL = process.env.FRONTEND_URL || DEFAULT_URL;
 
