@@ -1,10 +1,10 @@
 // Endpoints to fetch data from the backend
 
-const LOCALHOST = "http://localhost";
+const LOCALHOST = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
-const PORT = "8080";
+// const PORT = "8080";
 
-const BASE_URL = `${LOCALHOST}:${PORT}/pace-calculator`;
+const BASE_URL = `${LOCALHOST}/pace-calculator`;
 
 export const ENDPOINTS = {
     DISTANCE: `${BASE_URL}/distance`,

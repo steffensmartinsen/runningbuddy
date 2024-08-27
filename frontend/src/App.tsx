@@ -3,6 +3,7 @@ import './App.css';
 import DistanceHandler from './components/distance';
 import PaceHandler from './components/pace';
 import TimeHandler from './components/time';
+import { ENDPOINTS } from './constants/endpoints';
 import { distanceClassname, paceClassname, timeClassname } from './utils/helpers';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   const [timeSelected, setTimeSelected] = useState(false);
 
   const handleDistanceSelected = () => {
+    console.log(ENDPOINTS.DISTANCE);
     if (distanceSelected) {
       setDistanceSelected(false);
     } else {
@@ -22,6 +24,7 @@ function App() {
   }
 
   const handlePaceSelected = () => {
+    console.log(ENDPOINTS.PACE);
     if (paceSelected) {
       setPaceSelected(false);
     } else {
@@ -32,6 +35,7 @@ function App() {
   }
 
   const handleTimeSelected = () => {
+    console.log(ENDPOINTS.TIME);
     if (timeSelected) {
       setTimeSelected(false);
     } else {

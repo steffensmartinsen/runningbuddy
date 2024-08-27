@@ -7,7 +7,7 @@ exports.SERVER_PORT = process.env.SERVER_PORT || "8080";
 // SERVERPORT is the port number on which the server will run
 exports.CLIENT_PORT = process.env.CLIENT_PORT || "3000";
 // LOCALHOST is the localhost URL
-exports.PRODUCTION_URL = process.env.PRODUCTION_URL || "http://localhost:80";
+exports.PRODUCTION_URL = process.env.PRODUCTION_URL || "http://localhost:8080";
 // ROOT is the root path of the application
 exports.ROOT = '/';
 // DEFAULT_URL is the default URL of the REACT application
