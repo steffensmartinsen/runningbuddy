@@ -3,6 +3,7 @@ import express, { Request, Response } from 'express';
 import * as constants from './constants';
 import { Home } from './routes/home';
 import dotenv from 'dotenv';
+import path from 'path';
 
 const routes = require('./routes/index');
 
@@ -15,6 +16,14 @@ app.use(express.json());
 
 // Serve the root path of the application
 app.get(constants.ROOT, Home);
+
+// Serve static files from the React frontend
+app.use(express.static(path.join(__dirname, '..', '..', 'frontend', 'build')));
+
+// Handle react routing, return all requests to the React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', '..', 'frontend', 'build', 'index.html'));
+})
 
 // Serve the pace calculator endpoint
 app.use(constants.ENDPOINT_PACE_CALCULATOR, routes);
