@@ -5,10 +5,6 @@ import { SetCORSHeaders } from '../helpers/functions';
 // Home is the function that serves the root path ('/')
 export function Home (req: Request, res: Response): void {
 
-    SetCORSHeaders(res);
-
-    // Simply redirect to the pace calculator endpoint
-    res.redirect(301, REDIRECT_URL);
-    console.log("redirect: ", REDIRECT_URL);
+    res.send("The root path is not supported, please visit the pace calculator at " + REDIRECT_URL);
 
 }
