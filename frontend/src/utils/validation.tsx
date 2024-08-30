@@ -33,11 +33,12 @@ const ValidatePace = (min: string, sec: string): boolean => {
 
 // Validation function for distance input
 const ValidateDistance = (distance: string): boolean => {
-    return ValidateNumber(distance);
+    return !isNaN(Number(distance)) && distance !== '';
 };
 
-// Atomic validation function for checking if an input is a number
+// Atomic validation function for checking if an input is a number, setting empty strings to '0'
 const ValidateNumber = (num: string): boolean => {
+    num = SetEmptyToZero(num);
     return !isNaN(Number(num)) && num !== '';
 };
 
@@ -49,6 +50,14 @@ const ValidateHour = (hour: string): boolean => {
 // Atomic validation function for minutes and seconds
 const ValidateMinAndSec = (min: string): boolean => {
     return Number(min) >= 0 && Number(min) < 60;
+}
+
+// Atomic function to set an empty string to '0'
+const SetEmptyToZero = (num: string): string => {
+    if (num === '') {
+        return '0';
+    }
+    return num;
 }
 
 export { ValidateTime, ValidatePace, ValidateDistance };
