@@ -1,3 +1,5 @@
 .idea
 .DS_Store
 .gitignore
+backend/.env
+frontend/.env
