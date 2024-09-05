@@ -1,6 +1,7 @@
 # Runningbuddy Calculations
 
-**The service is hosted on Render, and can be accessed [here](https://runningbuddy.onrender.com/pace-calculator).**
+**The service is hosted on Render, and can be accessed 
+<a href="https://runningbuddy.onrender.com/pace-calculator" target="_blank">here</a>.**
 
 The service provides the most popular calculations in terms of pace, distance and times for runners. 
 The service supports kilometers and min per kilometer, as well as miles and minutes per mile. 
