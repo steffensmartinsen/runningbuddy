@@ -12,8 +12,8 @@ function App() {
   const [paceSelected, setPaceSelected] = useState(false);
   const [timeSelected, setTimeSelected] = useState(false);
 
+  // Function that handles logic for selection of distance tab
   const handleDistanceSelected = () => {
-    console.log(ENDPOINTS.DISTANCE);
     if (distanceSelected) {
       setDistanceSelected(false);
     } else {
@@ -23,8 +23,8 @@ function App() {
     }
   }
 
+    // Function that handles logic for selection of pace tab
   const handlePaceSelected = () => {
-    console.log(ENDPOINTS.PACE);
     if (paceSelected) {
       setPaceSelected(false);
     } else {
@@ -34,8 +34,8 @@ function App() {
     }
   }
 
+    // Function that handles logic for selection of time tab
   const handleTimeSelected = () => {
-    console.log(ENDPOINTS.TIME);
     if (timeSelected) {
       setTimeSelected(false);
     } else {
@@ -67,6 +67,8 @@ function App() {
             <p className="tabHeader">Time</p>
           </div>
         </div>
+
+        {/* Logic that handles the rendering of selected tabs*/}
         {(distanceSelected || paceSelected || timeSelected) && (
           <div className="calculationContent">
             {distanceSelected && <DistanceHandler />}
