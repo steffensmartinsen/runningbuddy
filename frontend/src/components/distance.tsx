@@ -22,14 +22,14 @@ const DistanceHandler = () => {
 
         // Check if the time input is valid
         if (!ValidateTime(timeHour, timeMin, timeSec)) {
-            setErrorMessages('Invalid input');
+            setErrorMessages(constants.INVALID_INPUT);
             setResponse(false);
             return;
         }
 
         // Check if the pace input is valid
         if (!ValidatePace(paceMin, paceSec)) {
-            setErrorMessages('Invalid input');
+            setErrorMessages(constants.INVALID_INPUT);
             setResponse(false);
             return;
         }
@@ -61,7 +61,7 @@ const DistanceHandler = () => {
             if (response.ok) {
                 return response.json();
             }
-            throw new Error('Request failed.');
+            throw new Error(constants.REQUEST_FAILED);
         })
         .then(data => {
             console.log(data);
