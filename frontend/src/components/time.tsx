@@ -26,7 +26,7 @@ const TimeHandler = () => {
 
         // Check if the pace input is valid
         if (!ValidatePace(paceMin, paceSec)) {
-            setErrorMessages('Invalid input');
+            setErrorMessages(constants.INVALID_INPUT);
             setResponse(false);
             return;
         }
@@ -56,7 +56,7 @@ const TimeHandler = () => {
                 if (response.ok) {
                     return response.json();
                 }
-                throw new Error('Request failed.');
+                throw new Error(constants.REQUEST_FAILED);
             })
             .then(data => {
                 console.log(data);
@@ -75,7 +75,7 @@ const TimeHandler = () => {
 
             // Validate the distance input
             if (!ValidateDistance(distance)) {
-                setErrorMessages('Invalid input');
+                setErrorMessages(constants.INVALID_INPUT);
                 setResponse(false);
                 return;
             }
@@ -101,7 +101,7 @@ const TimeHandler = () => {
                 if (response.ok) {
                     return response.json();
                 }
-                throw new Error('Request failed.');
+                throw new Error(constants.REQUEST_FAILED);
             })
             .then(data => {
                 console.log(data);
