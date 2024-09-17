@@ -8,7 +8,6 @@ Additionally, the service can combine the two units returning pace in km given d
 
 
 The service is separated into a backend API written in Node TypeScript and a frontend written in React TypeScript. The primary goal for this project was to learn TypeScript and Node, and improve my React skills.
-A planned implementation is support for Strava, a popular social media for runners and other athletes, using the free Strava API in the backend. 
 
 # Details for requests to the backend
 The backend of the service is created with NodeJS, written in TypeScript and compiled to a JavaScript file that is executed. 
